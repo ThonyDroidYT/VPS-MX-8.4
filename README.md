@@ -3,7 +3,7 @@
 UPDATE 03/03/2021
 ```
 
-![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/blob/master/NEW-ULTIMATE-VPS-MX-8.0/Imagenes/NEW-ULTIMATE-VPS-MX-8.0.png)
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.0.png)
 
 -------------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ BOT MANAGER:
 
 ## Installation ( Team Illuminati VPS-MX Versao 8.3 )
 
-sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/master/NEW-ULTIMATE-VPS-MX-8.0/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
+sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
 -------------------------------------------------------------------------------
 
