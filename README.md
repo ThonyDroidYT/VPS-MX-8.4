@@ -49,19 +49,22 @@ BOT MANAGER:
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
 -------------------------------------------------------------------------------
-
-## Installation ( Team Casita VPS-MX Versao 8.1 )
-
-apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/master/NEW-ULTIMATE-VPS-MX-8.0/Casita/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
-
--------------------------------------------------------------------------------
-
-## Installation Oficial VPS-MX
-
-sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/master/NEW-ULTIMATE-VPS-MX-8.0/Oficial/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
-
--------------------------------------------------------------------------------
-
 * Creditos: https://github.com/rudi9999
 * Creditos: https://github.com/lacasitamx
 * Creditos: https://github.com/VPS-MX/
+-------------------------------------------------------------------------------
+
+```
+* SIN MINERIA! 
+* SIN KEYS! 
+* VERSION GRATUITA 
+* SIN VIRUS TROJANO (BOTNET) 
+* ARCHIVOS LIBERADOS (DECENCRIPTADOS)
+```
+
+```
+? https://t.me/admmanagerfree ?
+
+```
+
+**By: [  ???? ]**
