@@ -1,20 +1,20 @@
-# VPS-MX-Kalix1 ( MOD NEW-ULTIMATE )
+﻿# VPS-MX-Kalix1 ( MOD NEW-ULTIMATE )
 ```
 UPDATE 03/03/2021
 ```
 
 ![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.0.png)
 
--------------------------------------------------------------------------------
+**Manager Script**
 
-**Manager Script Repositorio**
+## :heavy_exclamation_mark: Requerimientos
 
 * Un sistema operativo basado en Linux (Ubuntu o Debian) 
 * Recomendamos Ubuntu 16.04 Server x86_64 / 18.04 Server x86_64
 * Se recomienda usar una distro nueva o formatiada
 
 ```
-# SCRIPT VPS�MX � Script Manager de VPS
+# SCRIPT VPS•MX ® Script Manager de VPS
 
 ESTE ES UN SCRIPT PARA LA ADMINISTRACION DE CUENTAS DE TIPO:
 
@@ -48,6 +48,17 @@ BOT MANAGER:
 
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
+```
+VPS-MX Versao 8.3 (las dependencias faltantes se instalarán automáticamente)
+```
+-------------------------------------------------------------------------------
+
+## :scroll: Registro de cambios
+
+**VERSION: 8.3**
+
+https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion
+
 -------------------------------------------------------------------------------
 * Creditos: https://github.com/rudi9999
 * Creditos: https://github.com/lacasitamx
@@ -63,8 +74,8 @@ sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAA
 ```
 
 ```
-? https://t.me/admmanagerfree ?
+☆ https://t.me/admmanagerfree ☆
 
 ```
 
-**By: [  ???? ]**
+**By: [  ⃘⃤꙰✰ ]**
