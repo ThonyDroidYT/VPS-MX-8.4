@@ -44,7 +44,7 @@ BOT MANAGER:
 -RECIBE NOTIFICACIONES CON BOT ESPECIAL
 ```
 
-## Installation ( Team Illuminati VPS-MX Versao 8.3 )
+## Installation VPS-MX Versao 8.3 ( Team Illuminati )
 
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
