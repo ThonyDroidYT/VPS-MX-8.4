@@ -66,12 +66,13 @@ https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Ver
 ## :octocat: Contribute
 
 1. @Kalix1 - Developer of VPS-MX
-2. Team Illuminati - Contributor 
+2. Team Illuminati - Contributor
+3. Team Casita-MX - Contributor
 
 -------------------------------------------------------------------------------
-* Creditos: https://github.com/rudi9999
-* Creditos: https://github.com/lacasitamx
-* Creditos: https://github.com/VPS-MX/
+* Repositorios: https://github.com/VPS-MX
+* Repositorios: https://github.com/lacasitamx
+* Repositorios: https://github.com/rudi9999
 -------------------------------------------------------------------------------
 
 ```
