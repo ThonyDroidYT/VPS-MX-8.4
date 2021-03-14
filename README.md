@@ -48,7 +48,7 @@ BOT MANAGER:
 -ETC
 ```
 
-## Installation VPS-MX Versao 8.3 ( Team Illuminati )
+## :book: Installation
 
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
@@ -62,6 +62,11 @@ VPS-MX Versao 8.3 (las dependencias faltantes se instalarán automáticamente)
 **VERSION: 8.3**
 
 https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion
+
+## :octocat: Contribute
+
+1. @Kalix1 - Developer of VPS-MX
+2. Team Illuminati - Contributor 
 
 -------------------------------------------------------------------------------
 * Creditos: https://github.com/rudi9999
