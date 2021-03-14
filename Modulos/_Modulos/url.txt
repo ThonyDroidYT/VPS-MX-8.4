@@ -20,3 +20,13 @@ https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Ofic
 https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Instalador-Shadowsocks-libev.sh
 
 https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Instalador-Shadowsocks-R.sh
+
+blockBT.sh
+budp.sh
+fai2ban.sh
+menu
+Shadowsocks-libev.sh
+Shadowsocks-R.sh
+sockspy.sh
+Unlock-Pass-VULTR.sh
+v2ray.sh
