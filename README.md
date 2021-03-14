@@ -68,6 +68,8 @@ https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Ver
 1. @Kalix1 - Developer of VPS-MX
 2. Team Illuminati - Contributor
 3. Team Casita-MX - Contributor
+3. @Rufu99 - Contributor
+3. @Alexmod80 - Contributor
 
 -------------------------------------------------------------------------------
 * Repositorios: https://github.com/VPS-MX
