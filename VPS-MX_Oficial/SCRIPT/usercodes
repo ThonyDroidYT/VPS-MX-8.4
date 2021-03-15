@@ -1002,7 +1002,7 @@ msg -ne "$(fun_trans  "Escriba el mensaje principal del BANNER de preferencia en
 msg -bar
 credi="$(less /etc/newadm/message.txt)"
 echo "$ban_ner" >> $local
-echo '<p style="text-align: center;"><strong><span style="color: #ff0000;">VPS&bull;MX&reg;</span> |&nbsp;</strong><span style="color: #0000ff;"><strong>'$credi'</strong></span></p>' >> $local
+echo '<p style="text-align: center;"><span style="color: #0000ff;"><strong>'$credi'</strong></span><br /><em><span style="color: #ff0000;"><strong>SCRIPT - VPS&bull;MX</strong></span></em></p>' >> $local
 if [[ -e "$local2" ]]; then
 rm $local2  > /dev/null 2>&1
 cp $local $local2 > /dev/null 2>&1
@@ -1046,8 +1046,8 @@ msg -bar
 msg -ama "   MENU ADMINISTRACION DE USUARIOS SSL/SSH/DROPBEAR"
 msg -bar
 menu_func "CREAR NUEVO USUARIO" "\033[1;35mCREAR USUARIO TEMPORAL" "\033[1;91mREMOVER USUARIO" "BLOQUEAR O DESBLOQUEAR USUARIO" "\033[1;93mREINICIAR CONTADOR DE BLOQUEADOS y EXPIRADOS" "EDITAR USUARIO" "\033[1;92mRENOVAR USUARIO" "DETALLES DE TODOS USUARIOS" "MONITOR DE USUARIOS CONECTADOS" "ELIMINAR USUARIOS VENCIDOS" "BACKUP USUARIOS" "BANNER SSH" "\033[1;31m⚠️ELIMINAR TODOS LOS USUARIOS⚠️ \n" " -fi ${verificar} \033[1;97m🔒 LIMITADOR-DE-CUENTAS 🔒 -" " -fi ${desbloqueo} \033[1;97m🔓 DESBLOQUEO-AUTOMATICO 🔓 -" "\033[1;92mLOG DE CUENTAS REGISTRADAS" "LIMPIAR LOG DE LIMITADOR"
-[[ -e "${SCPusr}/Limiter2.log" ]] && echo -ne "$(msg -verd "[18]") $(msg -verm2 ">") " && msg -azu "$(fun_trans "\033[1;93mVER LOG DE LIMITADOR")"
-echo -ne "$(msg -verd "[0]") $(msg -verm2 ">")" && msg -bra "$(fun_trans "VOLVER")"
+[[ -e "${SCPusr}/Limiter2.log" ]] && echo -ne "$(msg -verd "  [18]") $(msg -verm2 "==>") " && msg -azu "$(fun_trans "\033[1;93mVER LOG DE LIMITADOR")"
+echo -ne "$(msg -verd "  [0]") $(msg -verm2 "==>")" && msg -bra "$(fun_trans "  VOLVER")"
 msg -bar
 selection=$(selection_fun 18)
 case ${selection} in

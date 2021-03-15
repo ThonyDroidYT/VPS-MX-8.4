@@ -685,4 +685,3 @@ check_sys
 check_version
 [[ ${release} != "debian" ]] && [[ ${release} != "ubuntu" ]] && [[ ${release} != "centos" ]] && echo -e "${Error} Este script no es compatible con el sistema actual. ${release} !" && exit 1
 start_menu
-

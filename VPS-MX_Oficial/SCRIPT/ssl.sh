@@ -1,5 +1,5 @@
 #!/bin/bash
-#19/12/2019
+#02/12/2020 by @Kalix1
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
 SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
 SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
@@ -162,12 +162,14 @@ rm -rf /root/stunnel.crt > /dev/null 2>&1
 rm -rf /root/stunnel.key > /dev/null 2>&1
 return 0
 }
-echo -e "${cor[3]}INSTALADOR SSL By @Kalix1"
+clear
+msg -bar
+echo -e "${cor[3]}       INSTALADOR MONO Y MULTI SSL By @Kalix1"
 msg -bar
 echo -e "${cor[1]} Escoja la opcion deseada."
 msg -bar
-echo "1).- ININICIAR O PARAR SSL"
-echo "2).- AGREGAR PUERTOS SSL"
+echo "1).- ININICIAR O PARAR SSL "
+echo "2).- AGREGAR PUERTOS SSL   "
 msg -bar
 echo -n "Digite solo el numero segun su respuesta: "
 read opcao

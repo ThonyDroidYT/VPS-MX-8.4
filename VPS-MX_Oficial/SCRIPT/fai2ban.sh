@@ -1,20 +1,25 @@
 #!/bin/bash
+#02/12/2020 BY @KALIX1
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
 pid_fail=$(dpkg -l | grep fail2ban | grep ii)
 apache=$(dpkg -l | grep apache2 | grep ii)
 squid=$(dpkg -l | grep squid | grep ii)
 dropbear=$(dpkg -l | grep dropbear | grep ii)
 openssh=$(dpkg -l | grep openssh | grep ii)
+stunnel4=$(dpkg -l | grep stunnel4 | grep ii)
 [[ "$openssh" != "" ]] && s1="ssh"
 [[ "$squid" != "" ]] && s2="squid"
 [[ "$dropbear" != "" ]] && s3="dropbear"
 [[ "$apache" != "" ]] && s4="apache"
-echo -e "${cor[5]} $(fun_trans "Este es Fail2ban Protection")"
-echo -e "${cor[5]} $(fun_trans "Excelente para proteger contra ataques de DDOS")"
+[[ "$stunnel4" != "" ]] && s5="stunnel4"
+clear
+msg -bar
+echo -e "\e[93m         --   Fail2ban Protection v0.11.2 -- "
+echo -e "\e[97m          Anti ataques DDOS y spoofing SPAM"
 msg -bar
 if [[ ! -z "$pid_fail" ]]; then
  echo -e "${cor[2]} [1] >${cor[5]} $(fun_trans "Desinstalar Fail2ban")"
- echo -e "${cor[2]} [2] >${cor[5]} $(fun_trans "Mirar el registro")"
+ echo -e "${cor[2]} [2] >\e[92m $(fun_trans "Mirar el registro")"
  msg -bar
   while [[ -z ${logxyz} || ${logxyz} != @(1|2) ]]; do
    echo -ne "\033[1;37m$(fun_trans "Seleccione una Opcion"): " && read logxyz
@@ -22,7 +27,8 @@ if [[ ! -z "$pid_fail" ]]; then
   done
  case ${logxyz} in
   1)apt-get remove fail2ban -y &> /dev/null;;
-  2)cat /var/log/fail2ban.log;;
+  2)cat /var/log/fail2ban.log 
+    msg -bar;;
  esac
 exit 0
 fi
@@ -34,9 +40,9 @@ msg -bar
   done
 if [[ "$fail2ban" = @(s|S|y|Y) ]]; then
 apt-get install fail2ban -y &> /dev/null
-wget -O $HOME/fail2ban https://raw.githubusercontent.com/VPS-MX/VPS-MX-8.0/master/ArchivosUtilitarios/fail2ban-0.9.4.tar.gz &> /dev/null
+wget -O $HOME/fail2ban https://github.com/fail2ban/fail2ban/archive/0.11.2.tar.gz &> /dev/null
 tar -xf $HOME/fail2ban &> /dev/null
-cd $HOME/fail2ban-0.9.4 &> /dev/null
+cd $HOME/fail2ban-0.11.2 &> /dev/null
 python ./setup.py install &> /dev/null
 echo '[INCLUDES]
 before = paths-debian.conf
@@ -74,13 +80,17 @@ action_blocklist_de  = blocklist_de[email="%(sender)s", service=%(filter)s, apik
 action_badips = badips.py[category="%(__name__)s", banaction="%(banaction)s", agent="%(fail2ban_agent)s"]
 action_badips_report = badips[category="%(__name__)s", agent="%(fail2ban_agent)s"]
 action = %(action_)s' > /etc/fail2ban/jail.local
-echo -e "${cor[5]} $(fun_trans "Fail2ban sera activo en los Siguientes Puertos y Servicos"):"
+echo -ne "${cor[5]} $(fun_trans "Fail2ban sera activo en los Siguientes\n Puertos y Servicos"):"
+echo ""
 msg -bar
+echo -ne "\n"
 [ "$s1" != "" ] && echo -ne " $s1"
 [ "$s2" != "" ] && echo -ne " $s2"
 [ "$s3" != "" ] && echo -ne " $s3"
 [ "$s4" != "" ] && echo -ne " $s4"
-echo -e "\n"
+[ "$s5" != "" ] && echo -ne " $s5"
+echo -ne "\n"
+echo -ne "\n"
 msg -bar
 sleep 1
 if [[ "$s1" != "" ]]; then
@@ -410,7 +420,11 @@ logpath  = /var/log/system.log
 logencoding = utf-8
 [haproxy-http-auth]
 logpath  = /var/log/haproxy.log' >> /etc/fail2ban/jail.local
+
+
 [[ -e $HOME/fail2ban ]] && rm $HOME/fail2ban
-[[ -d $HOME/fail2ban-0.9.4 ]] && rm -rf $HOME/fail2ban-0.9.4
+[[ -d $HOME/fail2ban-0.11.2 ]] && rm -rf $HOME/fail2ban-0.11.2
+
+cd 
 service fail2ban restart
 fi
