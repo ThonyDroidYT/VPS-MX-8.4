@@ -37,6 +37,7 @@ blockBT.sh
 budp.sh
 fai2ban.sh
 menu
+shadowsocks.sh
 Shadowsocks-libev.sh
 Shadowsocks-R.sh
 sockspy.sh
