@@ -120,7 +120,7 @@ echo "${texto[$@]}"
 fi
 }
 atualiza_fun () {
-wget https://raw.githubusercontent.com/VPS-MX/VPS-MX_Oficial/master/VPS-MX.sh -O VPS-MX; chmod 777 VPS-MX; ./VPS-MX
+wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh -O instalscript.sh; chmod 777 instalscript.sh; ./instalscript.sh
 msg -bar2
 }
 funcao_idioma () {
