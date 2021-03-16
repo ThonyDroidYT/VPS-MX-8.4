@@ -1,4 +1,5 @@
 #!/bin/bash
+#19/12/2019
 SCPdir="/etc/newadm" && [[ ! -d ${SCPdir} ]] && exit 1
 SCPusr="${SCPdir}/ger-user" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
 SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
@@ -6,7 +7,7 @@ SCPinst="/etc/ger-inst" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
 # VERIFICANDO  CONDIÇÕES PRIMARIAS
 [[ $(dpkg --get-selections|grep -w "jq"|head -1) ]] || apt-get install jq -y &>/dev/null
-[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://www.dropbox.com/s/q697m59agmg43mq/ShellBot.sh?dl=0 &> /dev/null
+[[ ! -e "/bin/ShellBot.sh" ]] && wget -O /bin/ShellBot.sh https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh &> /dev/null
 [[ -e /etc/texto-bot ]] && rm /etc/texto-bot
 #VARIAVEL ENTRADA TOKEN
 msg -ama " BOT DE TELEGRAM Mod By MEX \033[1;31m"
@@ -250,7 +251,7 @@ local bot_retorno="$LINE\n"
 ajuda_fun () {
 local bot_retorno="$LINE\n"
          bot_retorno+="$(fun_trans "Hola Amigo")\n"
-         bot_retorno+="$(fun_trans "Bienvenido al BOT")\n"
+         bot_retorno+="$(fun_trans "Bienvenido al BOT") Mod By @Kalix1\n"
          bot_retorno+="$LINE\n"
          bot_retorno+="$(fun_trans "Lista de Comandos Disponibles")\n"
          bot_retorno+="$LINE\n"
