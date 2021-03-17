@@ -47,13 +47,13 @@ BOT MANAGER:
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
 ```
-VPS-MX Versao 8.3 (las dependencias faltantes se instalarán automáticamente)
+VPS-MX Versao 8.3.1 (las dependencias faltantes se instalarán automáticamente)
 ```
 -------------------------------------------------------------------------------
 
 ## :scroll: Registro de cambios
 
-**VERSION: 8.3**
+**VERSION: 8.3.1**
 
 https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion
 
