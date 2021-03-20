@@ -55,7 +55,7 @@ VPS-MX Versao 8.4 (las dependencias faltantes se instalarán automáticamente)
 
 **VERSION: 8.4**
 
-https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion
+https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Version
 
 ## :octocat: Contribute
 
