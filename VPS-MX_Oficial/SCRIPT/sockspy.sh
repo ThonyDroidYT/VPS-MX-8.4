@@ -1,11 +1,12 @@
 #!/bin/bash
-#19/05/2020
+#25/01/2021 by @Kalix1
 clear
-msg -bar
+clear
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
-apt-get install python -y > /dev/null 2>&1
+[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || apt-get install python -y &>/dev/null
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -26,7 +27,7 @@ tcpbypass_fun () {
 [[ -d $HOME/socks ]] && rm -rf $HOME/socks > /dev/null 2>&1
 cd $HOME && mkdir socks > /dev/null 2>&1
 cd socks
-patch="https://raw.githubusercontent.com/VPS-MX/VPS-MX-8.0/master/ArchivosUtilitarios/backsocz"
+patch="https://www.dropbox.com/s/mn75pqufdc7zn97/backsocz"
 arq="backsocz"
 wget $patch -o /dev/null
 unzip $arq > /dev/null 2>&1
@@ -66,7 +67,7 @@ msg -bar
 echo -ne "Digite Un Puerto SSH/DROPBEAR activo: \033[1;37m" && read puetoantla 
  msg -bar
 (
-less << PYTHON  > /etc/ger-inst/PDirect.py
+less << PYTHON  > /etc/VPS-MX/protocolos/PDirect.py
 import socket, threading, thread, select, signal, sys, time, getopt
 
 # Listen
@@ -338,9 +339,9 @@ if __name__ == '__main__':
 PYTHON
 ) > $HOME/proxy.log
 
-chmod +x /etc/ger-inst/PDirect.py
+chmod +x /etc/VPS-MX/protocolos/PDirect.py
 
-screen -dmS pydic-"$porta_socket" python ${SCPinst}/PDirect.py "$porta_socket" "$texto_soket" && echo ""$porta_socket" "$texto_soket"" >> /etc/newadm/PortPD.log
+screen -dmS pydic-"$porta_socket" python ${SCPinst}/PDirect.py "$porta_socket" "$texto_soket" && echo ""$porta_socket" "$texto_soket"" >> /etc/VPS-MX/PortPD.log
 }
 
 
@@ -364,8 +365,8 @@ pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') 
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && pid_kill $pidproxy6
 echo -e "\033[1;91m  $(fun_trans  "Socks DETENIDOS")"
 msg -bar
-rm -rf /etc/newadm/PortPD.log
-echo "" > /etc/newadm/PortPD.log
+rm -rf /etc/VPS-MX/PortPD.log
+echo "" > /etc/VPS-MX/PortPD.log
 exit 0
 }
 iniciarsocks () {
@@ -375,16 +376,18 @@ pidproxy3=$(ps x | grep -w  "PDirect.py" | grep -v "grep" | awk -F "pts" '{print
 pidproxy4=$(ps x | grep -w  "POpen.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy4 ]] && P4="\033[1;32m[ON]" || P4="\033[1;31m[OFF]"
 pidproxy5=$(ps x | grep "PGet.py" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy5 ]] && P5="\033[1;32m[ON]" || P5="\033[1;31m[OFF]"
 pidproxy6=$(ps x | grep "scktcheck" | grep -v "grep" | awk -F "pts" '{print $1}') && [[ ! -z $pidproxy6 ]] && P6="\033[1;32m[ON]" || P6="\033[1;31m[OFF]"
-echo -e "\033[1;32m $(fun_trans  "INSTALADOR SOCKS VPS-MX By MOD @Kalix1")"
+msg -bar 
+msg -tit
+msg -ama "   INSTALADOR DE PROXY'S VPS-MX By MOD @Kalix1"
 msg -bar
-echo -e "${cor[4]} [1] > \033[1;36m$(fun_trans  "Socks Python SIMPLE") $P1"
-echo -e "${cor[4]} [2] > \033[1;36m$(fun_trans  "Socks Python SEGURO") $P2"
-echo -e "${cor[4]} [3] > \033[1;36m$(fun_trans  "Socks Python DIRETO") $P3"
-echo -e "${cor[4]} [4] > \033[1;36m$(fun_trans  "Socks Python OPENVPN") $P4"
-echo -e "${cor[4]} [5] > \033[1;36m$(fun_trans  "Socks Python GETTUNEL") $P5"
-echo -e "${cor[4]} [6] > \033[1;36m$(fun_trans  "Socks Python TCP BYPASS") $P6"
-echo -e "${cor[4]} [7] > \033[1;36m$(fun_trans  "PARAR TODOS SOCKS PYTHON")"
-echo -e "${cor[4]} [0] > \033[1;37m$(fun_trans  "VOLVER")"
+echo -e "${cor[4]} [1] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python SIMPLE")\033[1;97m ------------- $P1"
+echo -e "${cor[4]} [2] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python SEGURO")\033[1;97m ------------- $P2"
+echo -e "${cor[4]} [3] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python DIRETO")\033[1;97m ------------- $P3"
+echo -e "${cor[4]} [4] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python OPENVPN")\033[1;97m ------------ $P4"
+echo -e "${cor[4]} [5] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python GETTUNEL")\033[1;97m ----------- $P5"
+echo -e "${cor[4]} [6] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  "Proxy Python TCP BYPASS")\033[1;97m --------- $P6"
+echo -e "${cor[4]} [7] $(msg -verm2 "==>>") \033[1;97m$(fun_trans  " ¡¡ PARAR TODOS LOS PROXY'S !!")"
+echo -e "$(msg -bar)\n${cor[4]} [0] $(msg -verm2 "==>>")  \e[97m\033[1;41m VOLVER \033[1;37m"
 msg -bar
 IP=(meu_ip)
 while [[ -z $portproxy || $portproxy != @(0|[1-7]) ]]; do

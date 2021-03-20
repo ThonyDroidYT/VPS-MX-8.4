@@ -1,12 +1,12 @@
 #!/bin/bash
-#19/12/2019
+#27/01/2021
 clear
-msg -bar
-SCPdir="/etc/newadm" && [[ ! -d ${SCPdir} ]] && exit 1
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
-SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
@@ -131,14 +131,16 @@ service squid3 restart > /dev/null 2>&1 &
 update-rc.d squid3 defaults > /dev/null 2>&1 &
 fi
 msg -bar
+service squid restart > /dev/null 2>&1
 echo -e " \033[1;32m PROTECCION DE PROXY INICIADA"
 msg -bar
 fi
 }
 fi 
 }
-
-echo -e "${cor[3]}    AUTENTIFICAR PROXY SQUID ${cor[2]}[VPS-MX]"
+msg -bar
+msg -tit
+msg -ama "            AUTENTIFICAR PROXY SQUID "
 msg -bar
 unset squid_log1
 [[ -e /usr/bin/squid_log1 ]] && squid_log1="\033[1;32m$(source trans -b pt:${id} "ACTIVO")"
@@ -157,8 +159,7 @@ msg -bar
 squidpass
 ;;
 esac
-#Reinicia ADM
-
+#REINICIANDO VPS-MX (SQUID)
 [[ "$1" = "1" ]] && squidpass
 ####_Eliminar_Tmps_####
 [[ -e $_tmp ]] && rm $_tmp

@@ -1,7 +1,12 @@
-#!/bin/bash
+# !/bin/bash
+# 27/01/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 dnsnetflix () {
 echo "nameserver $dnsp" > /etc/resolv.conf
 #echo "nameserver 8.8.8.8" >> /etc/resolv.conf
@@ -14,6 +19,7 @@ echo -e "${cor[4]}  DNS AGREGADOS CON EXITO"
 } 
 clear
 msg -bar2
+msg -tit
 echo -e "\033[1;93m     AGREGARDOR DE DNS PERSONALES By @USA1_BOT "
 msg -bar2
 echo -e "\033[1;39m Esta funcion ara que puedas ver Netflix con tu VPS"

@@ -1,10 +1,11 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
 clear
 msg -bar
-SCPdir="/etc/newadm" && [[ ! -d ${SCPdir} ]] && exit 1
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPinst} ]] && exit
 SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
 #timedatectl set-timezone UTC
 # Detect Debian users running the script with "sh" instead of bash
@@ -82,25 +83,27 @@ case $1 in
 esac
 }
 meu_ip () {
-if [[ -e /etc/MEUIPADM ]]; then
-echo "$(cat /etc/MEUIPADM)"
+if [[ -e /etc/VPS-MX/MEUIPvps ]]; then
+echo "$(cat /etc/VPS-MX/MEUIPvps)"
 else
 MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
 [[ "$MEU_IP" != "$MEU_IP2" ]] && echo "$MEU_IP2" || echo "$MEU_IP"
-echo "$MEU_IP2" > /etc/MEUIPADM
+echo "$MEU_IP" > /etc/VPS-MX/MEUIPvps
 fi
 }
 IP="$(meu_ip)"
 
 instala_ovpn2 () {
+msg -bar3
 clear
 msg -bar
+msg -tit
 echo -e "\033[1;32m     INSTALADOR DE OPENVPN | VPS-MX By @Kalix1"
 msg -bar
 	# OpenVPN setup and first user creation
-echo -e "\033[1;97mEl script necesita ciertos parametros para configurar OpenVPN."
-echo "Si quieres dejar la configuracion por default solo presiona ENTER."
+echo -e "\033[1;97mSe necesitan ciertos parametros para configurar OpenVPN."
+echo "Configuracion por default solo presiona ENTER."
 echo "Primero, cual es la IPv4 que quieres para OpenVPN"
 echo "Detectando..."
 msg -bar
@@ -733,6 +736,7 @@ msg -bar
 return 0
 }
 edit_ovpn_host () {
+msg -bar3
 msg -ama " CONFIGURACION HOST DNS OPENVPN"
 msg -bar
 while [[ $DDNS != @(n|N) ]]; do

@@ -3,7 +3,7 @@
 UPDATE 03/03/2021
 ```
 
-![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.0.png)
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.3.1.png)
 
 **Manager Script**
 

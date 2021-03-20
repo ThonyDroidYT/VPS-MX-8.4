@@ -1,7 +1,12 @@
 #!/bin/bash
-#19/12/2019
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+#27/01/2021
+clear
+clear
+declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 port () {
 local portas
 local portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -21,7 +26,8 @@ local PORTENTRY="$2"
 [[ ! $(echo -e $(port|grep -v ${SERVICE})|grep -w "$PORTENTRY") ]] && return 0 || return 1
 }
 edit_squid () {
-msg -azu "$(fun_trans "REDEFINIR PUERTOS SQUID")"
+
+msg -ama "$(fun_trans "REDEFINIR PUERTOS SQUID")"
 msg -bar
 if [[ -e /etc/squid/squid.conf ]]; then
 local CONF="/etc/squid/squid.conf"
@@ -126,6 +132,7 @@ msg -azu "$(fun_trans "PUERTOS REDEFINIDOS")"
 msg -bar
 }
 edit_dropbear () {
+msg -bar
 msg -azu "$(fun_trans "REDEFINIR PUERTOS DROPBEAR")"
 msg -bar
 local CONF="/etc/default/dropbear"
@@ -184,9 +191,12 @@ msg -bar
 msg -azu "$(fun_trans "PUERTOS REDEFINIDOS")"
 msg -bar
 }
+
 main_fun () {
-msg -azu "$(fun_trans "Gestor de Puertos By Mod MEX")"
-msg -bar
+msg -bar2
+msg -tit ""
+msg -ama "                EDITAR PUERTOS ACTIVOS "
+msg -bar2
 unset newports
 i=0
 while read line; do
@@ -206,7 +216,7 @@ for((a=1; a<=$i; a++)); do
 [[ $dropbear = $a ]] && echo -ne "\033[1;32m [$dropbear] > " && msg -azu "$(fun_trans "REDEFINIR PUERTOS DROPBEAR")"
 [[ $ssh = $a ]] && echo -ne "\033[1;32m [$ssh] > " && msg -azu "$(fun_trans "REDEFINIR PUERTOS SSH")"
 done
-echo -ne "\033[1;32m [0] > " && msg -azu "$(fun_trans "VOLVER")"
+echo -ne "$(msg -bar)\n\033[1;32m [0] > " && msg -azu "\e[97m\033[1;41m VOLVER \033[1;37m"
 msg -bar
 while true; do
 echo -ne "\033[1;37m$(fun_trans "Seleccione"): " && read selection

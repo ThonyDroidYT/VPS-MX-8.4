@@ -1,5 +1,6 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
 clear
 msg -bar
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
@@ -927,7 +928,7 @@ Service_SSR(){
 		chkconfig ssrmu on
 	else
 		if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/service/ssrmu_debian -O /etc/init.d/ssrmu; then
-			echo -e "${Error} Fallo la descarga de la secuencia de comandos de administraci�n de servicio de ShadowsocksR!" && exit 1
+			echo -e "${Error} Fallo la descarga de la secuencia de comandos de administracion de servicio de ShadowsocksR!" && exit 1
 		fi
 		chmod +x /etc/init.d/ssrmu
 		update-rc.d -f ssrmu defaults
@@ -1990,8 +1991,8 @@ if [[ "${action}" == "clearall" ]]; then
 elif [[ "${action}" == "monitor" ]]; then
 	crontab_monitor_ssr
 else
-echo -e "\033[1;37m       =====>>►► 🐲 PANEL VPS•MX 🐲 ◄◄<<=====       \033[1;37m"
-msg -bar
+
+echo -e "$(msg -tit) " 
 echo -e "        Controlador de ShadowSock-R  ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
 $(msg -bar)
   ${Green_font_prefix}1.${Font_color_suffix} Instalar ShadowsocksR 

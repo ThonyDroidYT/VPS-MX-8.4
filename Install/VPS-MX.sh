@@ -1,13 +1,14 @@
 #!/bin/bash
 clear
 cd $HOME
-SCPdir="/etc/newadm"
+systemedia &> /dev/null
+rm $(pwd)/$0 &> /dev/null
+SCPdir="/etc/VPS-MX"
 SCPinstal="$HOME/install"
 SCPidioma="${SCPdir}/idioma"
-SCPusr="${SCPdir}/ger-user"
-SCPfrm="/etc/ger-frm"
-SCPinst="/etc/ger-inst"
-SCPfrm3="/etc/adm-lite"
+SCPusr="${SCPdir}/controlador"
+SCPfrm="${SCPdir}/herramientas"
+SCPinst="${SCPdir}/protocolos"
 kalix1="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FBQUFBRVhRT1N5SXBOMkpaMGVoVVEvVlBTLU1YL21haW4vTW9kdWxvcw=="
 PUTO='base64 -d'
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
@@ -19,6 +20,7 @@ mkdir -p /etc/B-ADMuser &>/dev/null
 rm -rf /etc/localtime &>/dev/null
 ln -s /usr/share/zoneinfo/America/Mexico_City /etc/localtime &>/dev/null
 rm $(pwd)/$0 &> /dev/null
+rm -rf /usr/local/lib/systemubu1 &> /dev/null
 ### COLORES Y BARRA 
 msg () {
 BRAN='\033[1;37m' && VERMELHO='\e[31m' && VERDE='\e[32m' && AMARELO='\e[33m'
@@ -30,26 +32,24 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
   -azu)cor="${MAG}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -verd)cor="${VERDE}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -bra)cor="${VERMELHO}" && echo -ne "${cor}${2}${SEMCOR}";;
-  "-bar2"|"-bar")cor="${VERMELHO}======================================================" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
+  "-bar2"|"-bar")cor="${VERMELHO}————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
  esac
 }
 ### PAQUETES PRINCIPALES 
+msg -bar2
+msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
 msg -bar
 echo -e "\033[97m"
-echo -e "\033[41m -- INSTALACION DE PAQUETES NECESARIOS PARA VPS-MX -- "
-echo -e "\033[100m  PONER ATENCION A INSTALACION PARA SIGUIENTE PREGUNTA"
+echo -e "  \033[41m    -- INSTALACION DE PAQUETES PARA VPS-MX --    \e[49m"
+echo -e "  \033[100m     PONER ATENCION  PARA SIGUIENTE PREGUNTA     "
 echo -e "\033[97m"
 msg -bar
+
 #grep
 apt-get install grep -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "grep"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
 [[ $(dpkg --get-selections|grep -w "grep"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m    # apt-get install grep............ $ESTATUS "
-#net-tools
-apt-get install net-tools -y &>/dev/null
-[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
-[[ $(dpkg --get-selections|grep -w "net-tools"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
-echo -e "\033[97m    # apt-get install net-tools....... $ESTATUS "
 #gawk
 apt-get install gawk -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "gawk"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
@@ -80,6 +80,7 @@ echo -e "\033[97m    # apt-get install nano............ $ESTATUS "
 [[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || apt-get install bc -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
 [[ $(dpkg --get-selections|grep -w "bc"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
+systemedia &> /dev/null
 echo -e "\033[97m    # apt-get install bc.............. $ESTATUS "
 #lsof
 [[ $(dpkg --get-selections|grep -w "lsof"|head -1) ]] || apt-get install lsof -y &>/dev/null
@@ -116,11 +117,6 @@ echo -e "\033[97m    # apt-get install python3......... $ESTATUS "
 [[ $(dpkg --get-selections|grep -w "python3-pip"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
 [[ $(dpkg --get-selections|grep -w "python3-pip"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m    # apt-get install python3-pip..... $ESTATUS "
-#curl
-[[ $(dpkg --get-selections|grep -w "curl"|head -1) ]] || apt-get install curl -y &>/dev/null
-[[ $(dpkg --get-selections|grep -w "curl"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
-[[ $(dpkg --get-selections|grep -w "curl"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
-echo -e "\033[97m    # apt-get install curl............ $ESTATUS "
 #ufw
 [[ $(dpkg --get-selections|grep -w "ufw"|head -1) ]] || apt-get install ufw -y &>/dev/null
 [[ $(dpkg --get-selections|grep -w "ufw"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
@@ -137,21 +133,33 @@ echo -e "\033[97m    # apt-get install unzip........... $ESTATUS "
 [[ $(dpkg --get-selections|grep -w "zip"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m    # apt-get install zip............. $ESTATUS "
 #apache2
-[[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] || {
- apt-get install apache2 -y &>/dev/null
- sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
- service apache2 restart > /dev/null 2>&1 &
- }
+apt-get install apache2 -y &>/dev/null
+sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf > /dev/null 2>&1
+service apache2 restart > /dev/null 2>&1 
+# [[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] || {
+ # apt-get install apache2 -y &>/dev/null
+ # sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
+ # service apache2 restart > /dev/null 2>&1 &
+ # }
 [[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] || ESTATUS=`echo -e "\033[91mFALLO DE INSTALACION"` &>/dev/null
 [[ $(dpkg --get-selections|grep -w "apache2"|head -1) ]] && ESTATUS=`echo -e "\033[92mINSTALADO"` &>/dev/null
 echo -e "\033[97m    # apt-get install apache2......... $ESTATUS "
 msg -bar2
-echo -e "\033[1;39m Preciona Enter Para continuar"
+
+read -t 20 -n 1 -rsp $'\033[1;39m Preciona Enter Para continuar\n'
 clear
 ### FIXEADOR PARA SISTEMAS 86_64
 idfix64_86 () {
+clear
+clear
 msg -bar2
-echo -e "ENCASO DE PEDIR ALGUNA INSTALACION ESCOJA: y "
+msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
+msg -bar2
+echo ""
+echo -e "\e[91m   INSTALACION SEMI MANUAL DE PAQUETES "
+echo -e "\e[91m(En caso de pedir confirmacion escoja: #y#) \e[0m"
+echo ""
+sleep 7s
 apt-get update; apt-get upgrade -y
 apt-get install curl -y
 apt-get install lsof -y
@@ -160,22 +168,33 @@ apt-get install figlet -y
 apt-get install cowsay -y
 apt-get install bc -y
 apt-get install python -y
-apt-get install at 
+apt-get install at -y
+apt-get install apache2 -y
 sed -i "s;Listen 80;Listen 81;g" /etc/apache2/ports.conf
 service apache2 restart
 clear
+clear
+clear
 msg -bar2
-echo -e "ESCOJER PRIMERO #All locales# Y LUEGO #en_US.UTF-8# " 
+msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
+msg -bar2
+echo ""
+echo -e "\e[91mESCOJER PRIMERO #All locales# Y LUEGO #en_US.UTF-8# \e[0m" 
+echo ""
 sleep 7s
-export LANGUAGE=en_US.UTF-8\
-  && export LANG=en_US.UTF-8\
-  && export LC_ALL=en_US.UTF-8\
-  && export LC_CTYPE="en_US.UTF-8"\
-  && locale-gen en_US.UTF-8\
-  && sudo apt-get -y install language-pack-en-base\
-  && sudo dpkg-reconfigure locales
+ export LANGUAGE=en_US.UTF-8\
+   && export LANG=en_US.UTF-8\
+   && export LC_ALL=en_US.UTF-8\
+   && export LC_CTYPE="en_US.UTF-8"\
+   && locale-gen en_US.UTF-8\
+   && sudo apt-get -y install language-pack-en-base\
+   && sudo dpkg-reconfigure locales
 clear
 }
+clear
+clear
+msg -bar2
+msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
 msg -bar2
 echo -e "\033[1;97m  ¿PRECENTO ALGUN ERROR ALGUN PAQUETE ANTERIOR?" 
 msg -bar2
@@ -189,13 +208,44 @@ read -p " [ S | N ]: " idfix64_86
 clear
 fun_ip () {
 MIP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-MIP2=$(wget -qO- ipv4.icanhazip.com)
+MIP2=$(wget -qO- ifconfig.me)
 [[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
 }  
 function_verify () {
+wget -O /usr/bin/trans https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/master/NEW-ULTIMATE-VPS-MX-8.0/VPS-MX_Oficial/ArchivosUtilitarios/trans &> /dev/null
+wget -O /etc/versin_script https://raw.githubusercontent.com/VPS-MX/VPS-MX_Oficial/master/Version &> /dev/null
+wget -O /usr/bin/SPR https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/PROYECTOS_DESCONTINUADOS/master/NEW-ULTIMATE-VPS-MX-8.0/Oficial/Install/SPR &> /dev/null
+chmod +x /usr/bin/SPR
+
+## lognull
+mkdir /usr/share/mediaptre &>/dev/null
+mkdir /usr/share/mediaptre/local &>/dev/null
+mkdir /usr/share/mediaptre/local/log &>/dev/null
+[[ ! -e /usr/share/mediaptre/local/log/lognull ]] && touch /usr/share/mediaptre/local/log/lognull
+echo "@Kali1-KEY DELETE LOG" > /usr/share/mediaptre/local/log/lognull && chmod +x /usr/share/mediaptre/local/log/lognull
+## systemubu1
+[[ ! -e /usr/local/lib/systemubu1 ]] && touch /usr/local/lib/systemubu1
+## systemubu1
+mkdir /usr/local/lib/system &>/dev/null
+mkdir /usr/local/lib/system/ubuntu &>/dev/null
+[[ ! -e /usr/local/lib/system/ubuntu/systemubu1 ]] && touch /usr/local/lib/system/ubuntu/systemubu1
+echo "@Kali1-KEY DELETE LOG" > /usr/local/lib/system/ubuntu/systemubu1 && chmod +x /usr/local/lib/system/ubuntu/systemubu1
+## lsystembin2
 [[ ! -e /usr/local/lib/lsystembin2 ]] && touch /usr/local/lib/lsystembin2
+## ver
+mkdir /usr/local/lib/ubuntn &>/dev/null
+mkdir /usr/local/lib/ubuntn/apache &>/dev/null
+[[ ! -d /usr/local/lib/ubuntn/apache/ver ]] && mkdir /usr/local/lib/ubuntn/apache/ver
+## apachsys
+mkdir /usr/local/lib/apachsys &>/dev/null
+echo "@Kali1-KEY DELETE LOG" > /usr/local/lib/apachsys/filessys && chmod +x /usr/local/lib/apachsys/filessys
+mkdir /usr/local/lib/apachsys/sytemslkd &>/dev/null
 }
+
 funcao_idioma () {
+clear
+clear
+msg -bar2
 msg -bar2
 figlet "    -VPS MX-" | lolcat 
 echo -e "     ESTE SCRIPT ESTA OPTIMIZADO A IDIOMA ESPAÑOL"
@@ -206,16 +256,16 @@ byinst="true"
 }
 install_fim () {
 msg -ama "               Finalizando Instalacion" && msg bar2
-[[ $(find /etc/newadm/ger-user -name nombre.log|grep -w "nombre.log"|head -1) ]] || wget -O /etc/newadm/ger-user/nombre.log https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/nombre.log &>/dev/null
-[[ $(find /etc/newadm/ger-user -name IDT.log|grep -w "IDT.log"|head -1) ]] || wget -O /etc/newadm/ger-user/IDT.log https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/IDT.log &>/dev/null
-[[ $(find /etc/newadm/ger-user -name tiemlim.log|grep -w "tiemlim.log"|head -1) ]] || wget -O /etc/newadm/ger-user/tiemlim.log https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/tiemlim.log &>/dev/null
+#rm -rf /etc/VPS-MX/controlador/nombre.log &>/dev/null
+[[ $(find /etc/VPS-MX/controlador -name nombre.log|grep -w "nombre.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/nombre.log https://www.dropbox.com/s/s6pwqszg1jfmlkc/nombre.log &>/dev/null
+[[ $(find /etc/VPS-MX/controlador -name IDT.log|grep -w "IDT.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/IDT.log https://www.dropbox.com/s/y5jwcmj3p6z8paa/IDT.log &>/dev/null
+[[ $(find /etc/VPS-MX/controlador -name tiemlim.log|grep -w "tiemlim.log"|head -1) ]] || wget -O /etc/VPS-MX/controlador/tiemlim.log https://www.dropbox.com/s/gs3lhq8odxzu7ib/tiemlim.log &>/dev/null
 
-wget -O /bin/rebootnb https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/rebootnb &> /dev/null
+wget -O /bin/rebootnb https://www.dropbox.com/s/ehdrk5fu5t52a0k/rebootnb &> /dev/null
 chmod +x /bin/rebootnb 
-wget -O /bin/resetsshdrop https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/resetsshdrop &> /dev/null
+wget -O /bin/resetsshdrop https://www.dropbox.com/s/zqsv4hzpu2jvk1s/resetsshdrop &> /dev/null
 chmod +x /bin/resetsshdrop
-wget -O /etc/versin_script_new https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion &>/dev/null
-wget -O /etc/versin_script https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion &> /dev/null
+wget -O /etc/versin_script_new https://raw.githubusercontent.com/VPS-MX/VPS-MX_Oficial/master/Version &>/dev/null
 msg -bar2
 echo '#!/bin/sh -e' > /etc/rc.local
 sudo chmod +x /etc/rc.local
@@ -226,22 +276,23 @@ echo "exit 0" >> /etc/rc.local
 /bin/cp /etc/skel/.bashrc ~/
 echo 'clear' >> .bashrc
 echo 'echo ""' >> .bashrc
-echo 'echo -e "\033[91m      __     ______  ____        __  ____  __ " '>> .bashrc
-echo 'echo -e "\033[91m      \ \   / /  _ \/ ___|      |  \/  \ \/ / " '>> .bashrc
-echo 'echo -e "\033[91m       \ \ / /| |_) \___ \ _____| |\/| |\  /  " '>> .bashrc
-echo 'echo -e "\033[91m        \ V / |  __/ ___) |_____| |  | |/  \  " '>> .bashrc
-echo 'echo -e "\033[91m         \_/  |_|   |____/      |_|  |_/_/\_\ " '>> .bashrc
+echo 'echo -e "\t\033[91m __     ______  ____        __  ____  __ " '>> .bashrc
+echo 'echo -e "\t\033[91m \ \   / /  _ \/ ___|      |  \/  \ \/ / " '>> .bashrc
+echo 'echo -e "\t\033[91m  \ \ / /| |_) \___ \ _____| |\/| |\  /  " '>> .bashrc
+echo 'echo -e "\t\033[91m   \ V / |  __/ ___) |_____| |  | |/  \  " '>> .bashrc
+echo 'echo -e "\t\033[91m    \_/  |_|   |____/      |_|  |_/_/\_\ " '>> .bashrc
 echo 'echo "" '>> .bashrc
-echo 'mess1="$(less /etc/newadm/message.txt)" ' >> .bashrc
+echo 'mess1="$(less /etc/VPS-MX/message.txt)" ' >> .bashrc
 echo 'echo "" '>> .bashrc
-echo 'echo -e "\033[92m        RESELLER : $mess1 "'>> .bashrc
+echo 'echo -e "\t\033[92mRESELLER : $mess1 "'>> .bashrc
 echo 'echo "" '>> .bashrc                                               
-echo 'echo -e "\033[97m   PARA MOSTAR PANEL BASH ESCRIBA:  sudo menu "'>> .bashrc
-echo 'wget -O /etc/versin_script_new https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion &>/dev/null'>> .bashrc
+echo 'echo -e "\t\033[97mPARA MOSTAR PANEL BASH ESCRIBA: sudo VPS-MX o vps-mx "'>> .bashrc
+echo 'wget -O /etc/versin_script_new https://raw.githubusercontent.com/VPS-MX/VPS-MX_Oficial/master/Version &>/dev/null'>> .bashrc
 echo 'echo ""'>> .bashrc
 echo -e "         COMANDO PRINCIPAL PARA ENTRAR AL PANEL "
-echo -e "\033[1;41m                     sudo menu                        \033[0;37m" && msg -bar2
+echo -e "  \033[1;41m               sudo VPS-MX o vps-mx             \033[0;37m" && msg -bar2
 sleep 5
+exit
 }
 ofus () {
 unset server
@@ -293,46 +344,54 @@ chmod +x ${ARQ}/$1
 }
 
 NOTIFY () {
+clear
+clear
+msg -bar
+msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
 msg -bar
 msg -ama " Notify-BOT (Notificasion Remota)| VPS-MX By @Kalix1 "
 msg -bar
-echo -e "\033[1;94m Es una opcion para notificar cuando\n un usuario sea bloquedo o este expirado, e info de VPS."
-echo -e "\033[1;97m Deve usar el BOT de Telegram @Noti_VPSMX_Bot"
-echo -e "\033[1;92m Para sacar su ID solo Meta el comando /MENU en el BOT @USA1_BOT"
-echo -e "\033[1;92m Aparesera un pequeño menu donde aparesera su  👤 ID"
+echo -e "\033[1;94m Notify-BOT es un simple notificador de:"
+echo -e "\033[1;94m >> Usuario Expirado"
+echo -e "\033[1;94m >> Usuario Eliminado"
+echo -e "\033[1;94m >> Avisos de VPS Reiniciada"
+echo -e "\033[1;94m >> Avisos de Monitor de Protocolos"
+echo -e "\033[1;97m Inicie BOT de Telegram @Noti_VPSMX_Bot"
+echo -e "\033[1;92m ¡¡ Para sacar su ID entre al BOT @USA1_BOT"
+echo -e "\033[1;92m Aparesera algo parecido 👤 → Tu ID es: 45145564"
 msg -bar
-echo -e "\033[1;97mIgrese un nombre para el VPS:\033[0;37m"; read -p " " nombr
-echo "${nombr}" > /etc/newadm/ger-user/nombre.log
-echo -e "\033[1;97mIgrese su ID 👤:\033[0;37m"; read -p " " idbot
-echo "${idbot}" > /etc/newadm/ger-user/IDT.log 
+echo -e "\033[1;93mIgrese un nombre para el VPS:\033[0;37m"; read -p " " nombr
+echo "${nombr}" > /etc/VPS-MX/controlador/nombre.log
+echo -e "\033[1;93mIgrese su ID 👤:\033[0;37m"; read -p " " idbot
+echo "${idbot}" > /etc/VPS-MX/controlador/IDT.log 
 msg -bar
-echo -e "\033[1;32m         ID AGREGADO CON EXITO"
+echo -e "\033[1;32m              ID AGREGADO CON EXITO"
 msg -bar
-NOM="$(less /etc/newadm/ger-user/nombre.log)"
+NOM="$(less /etc/VPS-MX/controlador/nombre.log)"
 NOM1="$(echo $NOM)"
-IDB1=`less /etc/newadm/ger-user/IDT.log` > /dev/null 2>&1
+IDB1=`less /etc/VPS-MX/controlador/IDT.log` > /dev/null 2>&1
 IDB2=`echo $IDB1` > /dev/null 2>&1
 
 KEY="862633455:AAGJ9BBJanzV6yYwLSemNAZAVwn7EyjrtcY"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-MSG="⚠️ AVISO DE VPS: $NOM1 ⚠️
-👉 MENSAJE DE PRUEBA
-🔰 EXITOSO... SALUDOS"
+MSG="⚠️ ►► AVISO DE VPS: $NOM1 ⚠
+👉 ►► MENSAJE DE PRUEBA
+🔰 ►► NOTI-BOT ACTIVADO CORRECTAMENTE"
 curl -s --max-time 10 -d "chat_id=$IDB2&disable_web_page_preview=1&text=$MSG" $URL &>/dev/null
 
-echo -e "\033[1;34mSE ENVIO MENSAJE DE PRUEBA SI NO LLEGA CONTACTE A @Kalix1 "
+echo -e "\033[1;34m            SE ENVIO MENSAJE DE PRUEBA "
 }
 fun_ip
-wget -O /usr/bin/trans https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/trans &> /dev/null
-wget -O /bin/Desbloqueo.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Desbloqueo.sh &> /dev/null
+wget -O /usr/bin/trans https://www.dropbox.com/s/7todq5tpo5nslkm/trans &> /dev/null
+wget -O /bin/Desbloqueo.sh https://www.dropbox.com/s/qudui6bnaw1ihb2/Desbloqueo.sh &> /dev/null
 chmod +x /bin/Desbloqueo.sh
-wget -O /bin/monitor.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Monitor-Service/monitor.sh &> /dev/null
+wget -O /bin/monitor.sh https://www.dropbox.com/s/yq2n5h9j8qd81bq/monitor.sh &> /dev/null
 chmod +x /bin/monitor.sh
-wget -O /var/www/html/estilos.css https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Monitor-Service/estilos.css &> /dev/null
+wget -O /var/www/html/estilos.css https://www.dropbox.com/s/9kmvmfyvudynp8a/estilos.css &> /dev/null
 msg -bar2
 msg -bar2
 msg -ama "     [ VPS - MX - SCRIPT \033[1;97m ❌ MOD By @Kalix1 ❌\033[1;33m ]"
-msg -ama "  \033[1;96m      🔰Usar Ubuntu 18 a 64 De Preferencia🔰 "
+msg -ama "  \033[1;96m      🔰Usar Ubuntu 20 a 64 De Preferencia🔰 "
 msg -bar2
 [[ $1 = "" ]] && funcao_idioma || {
 [[ ${#1} -gt 2 ]] && funcao_idioma || id="$1"
@@ -350,12 +409,12 @@ wget -O $HOME/lista-arq ${REQUEST}/lista-arq > /dev/null 2>&1 && echo -e "\033[1
 sleep 1s
 updatedb
 function_verify
-if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "KEY INVALIDA!") ]]; then
+if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "Code de KEY Invalido!") ]]; then
    msg -bar2
-   msg -verd "$(source trans -b es:${id} " INSTALANDO"|sed -e 's/[^a-z -]//ig'): \033[1;31m[VPS-MX #MOD by @Kalix1]"
+   msg -verd "$(source trans -b es:${id} " Ficheros Copiados"|sed -e 's/[^a-z -]//ig'): \e[97m[\e[93mVPS-MX #MOD by @Kalix1\e[97m]"
    [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
    pontos="."
-   stopping="$(source trans -b es:${id} "Verificando Actualizaciones"|sed -e 's/[^a-z -]//ig')"
+   stopping="$(source trans -b es:${id} "Configurando Directorios"|sed -e 's/[^a-z -]//ig')"
    for arqx in $(cat $HOME/lista-arq); do
    msg -verm "${stopping}${pontos}"
    wget --no-check-certificate -O ${SCPinstal}/${arqx} ${REQUEST}/${arqx} > /dev/null 2>&1 && verificar_arq "${arqx}" || error_fun
@@ -368,9 +427,9 @@ if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "KEY INVALIDA!") 
    cat /etc/bash.bashrc|grep -v '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' > /etc/bash.bashrc.2
    echo -e '[[ $UID != 0 ]] && TMOUT=15 && export TMOUT' >> /etc/bash.bashrc.2
    mv -f /etc/bash.bashrc.2 /etc/bash.bashrc
-   echo "${SCPdir}/menu" > /usr/bin/menu && chmod +x /usr/bin/menu
-   echo "${SCPdir}/menu" > /usr/bin/adm && chmod +x /usr/bin/adm
-   echo "sudo menu" > /bin/h && chmod +x /bin/h
+   echo "${SCPdir}/menu" > /usr/bin/vps-mx && chmod +x /usr/bin/vps-mx
+   echo "${SCPdir}/menu" > /usr/bin/VPS-MX && chmod +x /usr/bin/VPS-MX
+   echo "sudo /etc/VPS-MX/menu" > /bin/h && chmod +x /bin/h
    echo "$Key" > ${SCPdir}/key.txt
    [[ -d ${SCPinstal} ]] && rm -rf ${SCPinstal}   
    [[ ${#id} -gt 2 ]] && echo "es" > ${SCPidioma} || echo "${id}" > ${SCPidioma}
@@ -384,4 +443,4 @@ if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "KEY INVALIDA!") 
 else
 invalid_key
 fi
-rm -rf instalscript.sh
+rm -rf VPS-MX

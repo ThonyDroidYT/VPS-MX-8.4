@@ -1,8 +1,11 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -69,6 +72,8 @@ msg -bar
 rm /etc/shadowsocks-libev/config.json
 return 0
 }
+msg -bar
+msg -tit
 echo -e "${cor[3]}  INSTALADOR SHADOWSOCK-LIBEV+(obfs) By @Kalix1"
 msg -bar
 echo -e "${cor[1]} Escoja la opcion deseada."
@@ -81,7 +86,7 @@ read opcao
 case $opcao in
 1)
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://www.dropbox.com/s/85wgo369wqict5y/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-libev.sh
 ./Instalador-Shadowsocks-libev.sh 2>&1 | tee Instalador-Shadowsocks-libev.log
 
@@ -90,7 +95,7 @@ chmod +x Instalador-Shadowsocks-libev.sh
 msg -bar
 echo -e "\033[1;93m  Desinstalar  ..."
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-libev.sh https://www.dropbox.com/s/85wgo369wqict5y/Instalador-Shadowsocks-libev.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-libev.sh
 ./Instalador-Shadowsocks-libev.sh uninstall
 rm -rf Instalador-Shadowsocks-libev.sh

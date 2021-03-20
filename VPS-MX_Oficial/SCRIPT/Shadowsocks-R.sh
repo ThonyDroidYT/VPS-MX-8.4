@@ -1,8 +1,11 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -69,7 +72,9 @@ msg -bar
 rm -rf /etc/shadowsocks-r/config.json
 return 0
 }
-echo -e "${cor[3]}  INSTALADOR SHADOWSOCK-R+(obfs) By @Kalix1"
+msg -bar
+msg -tit
+echo -e "${cor[3]}    INSTALADOR SHADOWSOCK-R+(obfs) By @Kalix1"
 msg -bar
 echo -e "${cor[1]} Escoja la opcion deseada."
 msg -bar
@@ -81,16 +86,16 @@ read opcao
 case $opcao in
 1)
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/VPS-MX/VPS-MX-8.0/master/ArchivosUtilitarios/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://www.dropbox.com/s/9wesxosdqhzu0w8/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-R.sh
-./Instalador-Shadowsocks-R.sh 2>&1 | tee Instalador-Shadowsocks-R.log
+./Instalador-Shadowsocks-R.sh 2>&1 
 
 ;;
 2)
 msg -bar
 echo -e "\033[1;93m  Desinstalar  ..."
 msg -bar
-wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://raw.githubusercontent.com/VPS-MX/VPS-MX-8.0/master/ArchivosUtilitarios/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
+wget --no-check-certificate -O Instalador-Shadowsocks-R.sh https://www.dropbox.com/s/9wesxosdqhzu0w8/Instalador-Shadowsocks-R.sh > /dev/null 2>&1
 chmod +x Instalador-Shadowsocks-R.sh
 ./Instalador-Shadowsocks-R.sh uninstall
 rm -rf Instalador-Shadowsocks-R.sh

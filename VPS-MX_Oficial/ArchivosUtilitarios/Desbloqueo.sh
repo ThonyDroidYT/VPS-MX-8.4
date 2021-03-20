@@ -1,10 +1,11 @@
 #!/bin/bash
-SCPdir="/etc/newadm"
-SCPdir2="/etc/ger-frm"
-SCPusr="${SCPdir}/ger-user"
-MyPID="${SCPusr}/pid-adm"
-MyTIME="${SCPusr}/time-adm"
-USRdatabase="/etc/ADMuser"
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPdir2="${SCPdir}/herramientas"
+SCPusr="${SCPdir}/controlador"
+MyPID="${SCPusr}/pid-vps-mx"
+MyTIME="${SCPusr}/time-vps-mx"
+USRdatabase="${SCPdir}/VPS-MXuser"
+
 VERY="$(ps aux|grep "${SCPusr}/usercodes verificar"| grep -v grep)"
 [[ -e ${MyPID} ]] && source ${MyPID} || touch ${MyPID}
 [[ -e ${MyTIME} ]] && source ${MyTIME} || touch ${MyTIME}
@@ -55,8 +56,8 @@ else
 echo -e "${yellow}$usr $valid"
 fi
 done <<< "$(mostrar_usuarios)"
-rm -rf /etc/newadm-userlock
-rm -rf /etc/newadm/ger-user/Limiter.log
+rm -rf /etc/VPS-MX/VPS-MX-userlock
+rm -rf /etc/VPS-MX/controlador/Limiter.log
 }
 unlockall3 &>/dev/null
 rm_vencidos &>/dev/null

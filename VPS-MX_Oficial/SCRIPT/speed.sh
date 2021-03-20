@@ -1,10 +1,15 @@
 #!/bin/bash
-#19/12/2019
-[[ $(dpkg --get-selections|grep -w "python"|head -1) ]] || apt-get install python -y &>/dev/null
+#26/01/2021
+clear
+clear
+[[ $(dpkg --get-selections|grep -w "speedtest-cli"|head -1) ]] || apt-get install speedtest-cli -y &>/dev/null
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
-echo -e "${cor[4]} $(fun_trans "Speed Test") [VPS-MX By @Kalix1]"
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+msg -bar
+echo -e "${cor[4]} $(fun_trans "    PRUEBA DE VELOCIDAD DE HOSTING ") [By VPS-MX]"
 msg -bar
 ping=$(ping -c1 google.com |awk '{print $8 $9}' |grep -v loss |cut -d = -f2 |sed ':a;N;s/\n//g;ta')
 # PROGRESS - BAR
@@ -12,12 +17,12 @@ ping=$(ping -c1 google.com |awk '{print $8 $9}' |grep -v loss |cut -d = -f2 |sed
 echo -ne "[" >&2
 while [[ ! -e /tmp/pyend ]]; do
 echo -ne "." >&2
-sleep 0.8s
+sleep 0.5s
 done
 rm /tmp/pyend
 echo -e "]" >&2
 ) &
-starts_test=$(python ${SCPfrm}/speedtest.py) && touch /tmp/pyend
+starts_test=$(speedtest-cli) && touch /tmp/pyend
 sleep 0.6s
 down_load=$(echo "$starts_test" | grep "Download" | awk '{print $2,$3}')
 up_load=$(echo "$starts_test" | grep "Upload" | awk '{print $2,$3}')

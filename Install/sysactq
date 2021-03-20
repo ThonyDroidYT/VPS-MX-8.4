@@ -1,5 +1,6 @@
 #!/bin/bash
-
+clear
+clear
 ### COLORES Y BARRA 
 msg () {
 BRAN='\033[1;37m' && VERMELHO='\e[31m' && VERDE='\e[32m' && AMARELO='\e[33m'
@@ -11,16 +12,18 @@ AZUL='\e[34m' && MAGENTA='\e[35m' && MAG='\033[1;36m' &&NEGRITO='\e[1m' && SEMCO
   -azu)cor="${MAG}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -verd)cor="${VERDE}${NEGRITO}" && echo -e "${cor}${2}${SEMCOR}";;
   -bra)cor="${VERMELHO}" && echo -ne "${cor}${2}${SEMCOR}";;
-  "-bar2"|"-bar")cor="${VERMELHO}======================================================" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
+  "-bar2"|"-bar")cor="${VERMELHO}————————————————————————————————————————————————————" && echo -e "${SEMCOR}${cor}${SEMCOR}";;
  esac
 }
-rm -rf instalscript.sh
+
 ## Script name
 SCRIPT_NAME=vpsmxup
 
 ## Title and graphics
 msg -bar2
-echo "         VPS-MX - $(date)"
+echo -e " \e[97m\033[1;41m   =====>>►► 🐲 SCRIPT - VPS•MX ®️ 🐲 ◄◄<<=====     \033[1;37m"
+msg -bar2
+msg -ama "              PREPARANDO ACTUALIZACIONES"
 msg -bar2
 sleep 5s
 
@@ -30,7 +33,7 @@ DOWEEK="$(date +'%u')"
 HOSTNAME="$(hostname)"
 
 ## Absolute path to this script, e.g. /home/user/bin/foo.sh
-SCRIPT_FULLPATH=$(readlink -f "$0")
+SCRIPT_FULLPATH=/usr/bin/sysactq
 SCRIPT_HASH=`md5sum ${SCRIPT_FULLPATH} | awk '{ print $1 }'`
 
 ## Absolute path this script is in, thus /home/user/bin
@@ -68,8 +71,7 @@ if ! [ $(id -u) = 0 ]; then
 		echo $(date)
 		msg -bar2
 		exit
-fi
-
+fi 
 ## Profile requested
 if [ ! -z "$1" ]; then
 
@@ -97,7 +99,6 @@ if [ ! -z "$1" ]; then
 		exit
 	fi
 fi
-
 
 for CONFIGFILE_FULLPATH in "$CONFIGFILE_FULLPATH_DEFAULT" "$CONFIGFILE_MYSQL_FULLPATH_ETC" "$CONFIGFILE_FULLPATH_ETC" "$CONFIGFILE_FULLPATH_DIR" "$CONFIGFILE_PROFILE_FULLPATH_ETC" "$CONFIGFILE_PROFILE_FULLPATH_DIR"
 do
@@ -163,6 +164,7 @@ else
 	
 fi
 
+
 if [ "$COMPOSER_UPGRADE" = "1" ]; then
 
 	printTitle "Compositor de actualización automática"
@@ -193,13 +195,32 @@ lsb_release -d
 
 printTitle "Tiempo que tomó Actulizacion de Repositorios de UBUNTU"
 echo "$((($(date +%s)-$TIME_START)/60)) min."
+
+cd
+## INSTALL_DIR_PARENT
+/bin/cp /etc/skel/.bashrc ~/
+echo 'clear' >> .bashrc
+echo 'echo ""' >> .bashrc
+echo 'echo -e "\t\033[91m __     ______  ____        __  ____  __ " '>> .bashrc
+echo 'echo -e "\t\033[91m \ \   / /  _ \/ ___|      |  \/  \ \/ / " '>> .bashrc
+echo 'echo -e "\t\033[91m  \ \ / /| |_) \___ \ _____| |\/| |\  /  " '>> .bashrc
+echo 'echo -e "\t\033[91m   \ V / |  __/ ___) |_____| |  | |/  \  " '>> .bashrc
+echo 'echo -e "\t\033[91m    \_/  |_|   |____/      |_|  |_/_/\_\ " '>> .bashrc
+echo 'echo "" '>> .bashrc
+echo 'echo -e "\033[92m\t        INICIANDO INSTALADOR FINAL"'>> .bashrc
+echo 'echo "" '>> .bashrc                                               
+echo 'sleep 5s'>> .bashrc
+echo 'wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/VPS-MX.sh -O /usr/bin/VPS-MX &>/dev/null'>> .bashrc
+echo 'chmod +x /usr/bin/VPS-MX'>> .bashrc
+echo 'VPS-MX'>> .bashrc
+
 msg -bar2
-echo -e "\033[93m         -- ACTULIZACION DE UBUNTU COMPLETA -- "
-wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/VPS-MX.sh -O /usr/bin/VPS-MX &> /dev/null
-chmod +x /usr/bin/VPS-MX
+echo -e "\033[93m        -- ACTULIZACION DE UBUNTU COMPLETA -- "
+msg -bar2
+
 if [ "$REBOOT" = "1" ]; then
-	printTitle "        SU VPS SE REINICIARA EN 20 SEGUNDOS           "
-	
+	echo -e "\033[92m       ❗️ SU VPS SE REINICIARA EN 5 SEGUNDOS ❗️            "
+	msg -bar2
 	while [ $REBOOT_TIMEOUT -gt 0 ]; do
 	   echo -ne "                         -$REBOOT_TIMEOUT-\033[0K\r"
 	   sleep 1
@@ -207,10 +228,11 @@ if [ "$REBOOT" = "1" ]; then
 	done
 	reboot
 fi
-
-printTitle "Se procede a Instalar VPS-MX"
+rm -rf   &> /dev/null
+rm -rf /usr/bin/systembin &> /dev/null
+printTitle "Volviendo a $INITIAL_DIR"
+cd "$INITIAL_DIR"
+pwd
+printTitle "Encaso de no reiniciar auto ejecute: 'sudo reboot'"
 echo $(date)
-msg -bar2
-sleep 7s
-clear
-VPS-MX
+echo "$FRAME"

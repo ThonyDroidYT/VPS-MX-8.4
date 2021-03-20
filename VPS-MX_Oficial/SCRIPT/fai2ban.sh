@@ -1,5 +1,5 @@
 #!/bin/bash
-#02/12/2020 BY @KALIX1
+#27/01/2021
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
 pid_fail=$(dpkg -l | grep fail2ban | grep ii)
 apache=$(dpkg -l | grep apache2 | grep ii)
@@ -13,7 +13,9 @@ stunnel4=$(dpkg -l | grep stunnel4 | grep ii)
 [[ "$apache" != "" ]] && s4="apache"
 [[ "$stunnel4" != "" ]] && s5="stunnel4"
 clear
+clear
 msg -bar
+msg -tit
 echo -e "\e[93m         --   Fail2ban Protection v0.11.2 -- "
 echo -e "\e[97m          Anti ataques DDOS y spoofing SPAM"
 msg -bar
@@ -32,7 +34,7 @@ if [[ ! -z "$pid_fail" ]]; then
  esac
 exit 0
 fi
-echo -e "${cor[5]} $(fun_trans "Desea Instalar  Fail2ban?")"
+echo -e "${cor[5]}        Desea Instalar  Fail2ban?"
 msg -bar
   while [[ -z ${fail2ban} || ${fail2ban} != @(s|S|n|N|y|Y) ]]; do
    echo -ne "\033[1;37m$(fun_trans "Seleccione una Opcion") [S/N]: " && read fail2ban

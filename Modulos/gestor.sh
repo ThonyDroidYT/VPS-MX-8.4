@@ -1,9 +1,12 @@
-#!/bin/bash
+# !/bin/bash
+# 27/01/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPdir="/etc/newadm" && [[ ! -d ${SCPdir} ]] && exit 1
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
-SCPidioma="${SCPdir}/idioma" && [[ ! -e ${SCPidioma} ]] && touch ${SCPidioma}
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 
 fun_bar () {
 comando="$1"
@@ -174,8 +177,7 @@ echo -e " FECHA LOCAL ARG APLICADA!"
 gestor_fun () {
 clear
 msg -bar
-echo -e "\033[1;37m       =====>>►► 🐲 PANEL VPS•MX 🐲 ◄◄<<=====       \033[1;37m"
-msg -bar
+msg -tit
 echo -e " ${cor[3]}             AJUSTES INTERNOS DEL VPS  "
 msg -bar
 while true; do
@@ -187,7 +189,7 @@ echo -e "${cor[4]} [5] > \033[1;36mCAMBIAR CONTRASEÑA ROOT"
 echo -e "${cor[4]} [6] > \033[1;36mCAMBIAR HORA LOCAL MX"
 echo -e "${cor[4]} [7] > \033[1;36mCAMBIAR HORA LOCAL ARG"
 echo -e "${cor[2]} [8] > \033[1;100mAGREGAR ROOT a GoogleCloud y Amazon \033[0;37m"
-echo -e "${cor[4]} [0] > VOLVER"
+echo -e "$(msg -bar)\n${cor[4]} [0] > \e[97m\033[1;41m VOLVER \033[1;37m"
 while [[ ${opx} != @(0|[1-9]) ]]; do
 msg -bar
 echo -ne " Seleccione una Opcion: \033[1;37m" && read opx

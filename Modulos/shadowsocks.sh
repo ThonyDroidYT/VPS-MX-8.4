@@ -1,8 +1,11 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -70,7 +73,9 @@ rm /etc/shadowsocks.json
 return 0
 }
        while true; do
-	   echo -e "\033[1;32m $(fun_trans ${id} "INSTALADOR SHADOWSOCKS ADM-NEW By @Kalix1")"
+	   msg -bar
+	   msg -tit
+	   msg -ama "        INSTALADOR SHADOWSOCKS By @Kalix1"
 	   msg -bar
        echo -e "\033[1;33m $(fun_trans ${id} "Selecione una Criptografia")"
 	   msg -bar

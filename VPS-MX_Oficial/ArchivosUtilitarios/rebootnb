@@ -1,9 +1,9 @@
 #!/bin/bash
-NOM="$(less /etc/newadm/ger-user/nombre.log)"
+NOM="$(less /etc/VPS-MX/controlador/nombre.log)"
 NOM1="$(echo $NOM)"
-IDB=`less /etc/newadm/ger-user/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-MX/controlador/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
-KEY="862633455:AAGJ9BBJanzV6yYwLSemNAZAVwn7EyjrtcY"
+KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
 MSG="⚠️ AVISO DE VPS: $NOM1 ⚠️
 ❗️ VPS REINICIADA ❗️

@@ -1,8 +1,12 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;32m" [3]="\033[1;36m" [4]="\033[1;31m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+clear
+clear
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
+dirapache="/usr/local/lib/ubuntn/apache/ver" && [[ ! -d ${dirapache} ]] && exit
 #LISTA PORTAS
 mportas () {
 unset portas
@@ -52,7 +56,7 @@ $comando > /dev/null 2>&1
 pid=$!
 while [[ -d /proc/$pid ]]; do
 echo -ne " \033[1;33m["
-   for((i=0; i<10; i++)); do
+   for((i=0; i<20; i++)); do
    echo -ne "\033[1;31m##"
    sleep 0.2
    done
@@ -61,9 +65,10 @@ sleep 1s
 echo
 tput cuu1 && tput dl1
 done
-echo -e " \033[1;33m[\033[1;31m####################\033[1;33m] - \033[1;32m100%\033[0m"
+echo -e " \033[1;33m[\033[1;31m########################################\033[1;33m] - \033[1;32m100%\033[0m"
 sleep 1s
 }
+msg -bar3
 fun_squid  () {
   if [[ -e /etc/squid/squid.conf ]]; then
   var_squid="/etc/squid/squid.conf"
@@ -81,13 +86,15 @@ fun_squid  () {
   [[ -e $var_squid ]] && rm $var_squid
   return 0
   }
-echo -e "\033[1;32m $(fun_trans "INSTALADOR SQUID ADM-NEW By MOD MEX")"
+msg -bar
+msg -tit
+msg -ama "         INSTALADOR SQUID VPS-MX By @Kalix1"
 msg -bar
 fun_ip
 echo -ne " $(fun_trans "Confirme su ip")\033[1;91m"; read -p ": " -e -i $IP ip
 msg -bar
-echo -e " $(fun_trans "Ahora elige las Puertas que desea en el Squid")"
-echo -e " $(fun_trans "Seleccione las puertas en orden secuencial, Ejemplo 80 8080 8799 3128")"
+echo -e " $(fun_trans "\033[1;97mAhora elige los puertos que desea en el Squid")"
+echo -e " $(fun_trans "\033[1;97mSeleccione puertos en orden secuencial,\n \033[1;92mEjemplo: 80 8080 8799 3128")"
 msg -bar
 echo -ne " $(fun_trans "Digite losPuertos:")\033[1;32m "; read portasx
 msg -bar
@@ -109,6 +116,7 @@ msg -bar
 echo -e " $(fun_trans  "INSTALANDO SQUID")"
 msg -bar
 fun_bar "apt-get install squid3 -y"
+
 msg -bar
 echo -e " $(fun_trans  "INICIANDO CONFIGURACION")"
 echo -e ".bookclaro.com.br/\n.claro.com.ar/\n.claro.com.br/\n.claro.com.co/\n.claro.com.ec/\n.claro.com.gt/\n.cloudfront.net/\n.claro.com.ni/\n.claro.com.pe/\n.claro.com.sv/\n.claro.cr/\n.clarocurtas.com.br/\n.claroideas.com/\n.claroideias.com.br/\n.claromusica.com/\n.clarosomdechamada.com.br/\n.clarovideo.com/\n.facebook.net/\n.facebook.com/\n.netclaro.com.br/\n.oi.com.br/\n.oimusica.com.br/\n.speedtest.net/\n.tim.com.br/\n.timanamaria.com.br/\n.vivo.com.br/\n.rdio.com/\n.compute-1.amazonaws.com/\n.portalrecarga.vivo.com.br/\n.vivo.ddivulga.com/" > /etc/payloads
@@ -116,16 +124,16 @@ msg -bar
 echo -e "\033[1;32m $(fun_trans  "Ahora Escoja Una Conf Para Su Proxy")"
 msg -bar
 echo -e "|1| $(fun_trans  "Basico")"
-echo -e "|2| $(fun_trans  "Avanzado") -\033[1;31m $(fun_trans  "Usuario Debe Ajustar RX,TX de SSH")\033[1;37m"
+echo -e "|2| $(fun_trans  "Avanzado")\033[1;37m"
 msg -bar
 read -p "[1/2]: " -e -i 1 proxy_opt
 tput cuu1 && tput dl1
 if [[ $proxy_opt = 1 ]]; then
-echo -e " $(fun_trans  "INSTALANDO SQUID BASICO")"
-elif [[ $proxy_opt = 1 ]]; then
-echo -e " $(fun_trans  "INSTALANDO SQUID AVANZADO")"
+echo -e " $(fun_trans  "          INSTALANDO SQUID BASICO")"
+elif [[ $proxy_opt = 2 ]]; then
+echo -e " $(fun_trans  "          INSTALANDO SQUID AVANZADO")"
 else
-echo -e " $(fun_trans  "INSTALANDO SQUID BASICO")"
+echo -e " $(fun_trans  "          INSTALANDO SQUID BASICO")"
 proxy_opt=1
 fi
 unset var_squid
@@ -216,26 +224,39 @@ via off
 forwarded_for off
 pipeline_prefetch off" >> $var_squid
  else
-echo -e "#ConfiguracaoSquiD
-acl url1 dstdomain -i $ip
-acl url2 dstdomain -i 127.0.0.1
-acl url3 url_regex -i '/etc/payloads'
-acl url4 url_regex -i '/etc/opendns'
-acl url5 dstdomain -i localhost
-acl all src 0.0.0.0/0
-http_access allow url1
-http_access allow url2
-http_access allow url3
-http_access allow url4
-http_access allow url5
+echo -e "#Configuracion SquiD
+acl localhost src 127.0.0.1/32 ::1
+acl to_localhost dst 127.0.0.0/8 0.0.0.0/32 ::1
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 21
+acl Safe_ports port 443
+acl Safe_ports port 70
+acl Safe_ports port 210
+acl Safe_ports port 1025-65535
+acl Safe_ports port 280
+acl Safe_ports port 488
+acl Safe_ports port 591
+acl Safe_ports port 777
+acl CONNECT method CONNECT
+acl SSH dst $ip-$ip/255.255.255.255
+http_access allow SSH
+http_access allow manager localhost
+http_access deny manager
+http_access allow localhost
 http_access deny all
+coredump_dir /var/spool/squid
+refresh_pattern ^ftp: 1440 20% 10080
+refresh_pattern ^gopher: 1440 0% 1440
+refresh_pattern -i (/cgi-bin/|\?) 0 0% 0
+refresh_pattern . 0 20% 4320
 
-#portas" > $var_squid
+#Puertos" > $var_squid
 for pts in $(echo -e $PORT); do
 echo -e "http_port $pts" >> $var_squid
 done
 echo -e "
-#nome
+#HostName
 visible_hostname VPS-MX
 
 via off
@@ -244,22 +265,27 @@ pipeline_prefetch off" >> $var_squid
 fi
 touch /etc/opendns
 fun_eth
-echo -ne " \033[1;31m [ ! ] \033[1;33m$(fun_trans  "REINICIANDO SERVICIOS")"
+msg -bar
+echo -ne " \033[1;31m [ ! ] \033[1;33m$(fun_trans  "    REINICIANDO SERVICIOS")"
 squid3 -k reconfigure > /dev/null 2>&1
+squid -k reconfigure > /dev/null 2>&1
 service ssh restart > /dev/null 2>&1
 service squid3 restart > /dev/null 2>&1
+service squid restart > /dev/null 2>&1
 echo -e " \033[1;32m[OK]"
 msg -bar
-echo -e "${cor[3]}$(fun_trans  "SQUID CONFIGURADO")"
+echo -e "${cor[3]}$(fun_trans  "            SQUID CONFIGURADO")"
 msg -bar
 #UFW
 for ufww in $(mportas|awk '{print $2}'); do
 ufw allow $ufww > /dev/null 2>&1
 done
 }
+SPR &
 online_squid () {
 payload="/etc/payloads"
-echo -e "\033[1;33m$(fun_trans  "SQUID CONFIGURADO")"
+msg -bar
+echo -e "\033[1;33m$(fun_trans  "            SQUID CONFIGURADO")"
 msg -bar
 echo -e "${cor[2]} [1] >${cor[3]} $(fun_trans  "Colocar Host en Squid")"
 echo -e "${cor[2]} [2] >${cor[3]} $(fun_trans  "Remover Host de Squid")"
@@ -325,9 +351,13 @@ msg -bar
 if [[ ! -f "/etc/init.d/squid" ]]; then
 service squid3 reload
 service squid3 restart
+service squid reload
+service squid restart
 else
 /etc/init.d/squid reload
 service squid restart
+/etc/init.d/squid3 reload
+service squid3 restart
 fi	
 return 0
 elif [[ "$varpay" = "3" ]]; then

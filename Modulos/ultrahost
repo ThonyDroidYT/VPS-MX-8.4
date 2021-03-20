@@ -1,8 +1,12 @@
 #!/bin/bash
-#19/12/2019
+#27/06/2021
+clear
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 subdom () {
 SUBDOM="$1"
 [[ "$SUBDOM" = "" ]] && return
@@ -78,7 +82,9 @@ echo -ne "$(fun_trans "Desea Imprimir Resultados")? [S/N]: "; read yn
 return 0
 }
 #INICIA SCRIPT
-echo -e "\033[1;33m $(fun_trans "INICIALIZANDO PROCEDIMENTOS") (SCAN By Mod MEX)"
+msg -bar
+msg -tit
+echo -e "\033[1;33m $(fun_trans "                  SCAN DE SUNDOMINIOS")"
 msg -bar
 iniciar
 [[ $? = "0" ]] &&

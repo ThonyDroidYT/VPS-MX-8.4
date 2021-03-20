@@ -10,7 +10,7 @@ ARCHIVO=monitor.html
 FECHA=$(date +'%d/%m/%Y %H:%M:%S')
 
 # Declaración de la función
-EstadoServicio() {
+EstadoServicio () {
 
     systemctl --quiet is-active $1
     if [ $? -eq 0 ]; then
@@ -18,16 +18,16 @@ EstadoServicio() {
     else
         echo "<p>Estado del servicio $1 está || <span class='detenido'> DESACTIVADO | REINICIANDO</span>.</p>" >> $DIR/$ARCHIVO
 		service $1 restart &
-NOM=`less /etc/newadm/ger-user/nombre.log` > /dev/null 2>&1
+NOM=`less /etc/VPS-MX/controlador/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/newadm/ger-user/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-MX/controlador/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
-KEY="862633455:AAGJ9BBJanzV6yYwLSemNAZAVwn7EyjrtcY"
+KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-MSG="⚠️ AVISO DE VPS: $NOM1 ⚠️
-❗️Protocolo $1 con fallo / Reiniciando❗️"
-curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=1&text=$MSG" $URL
-		
+MSG="⚠️ _AVISO DE VPS:_ *$NOM1* ⚠️
+❗️ _Protocolo_ *[ $1 ]* _con Fallo_ ❗️ 
+🛠 _-- Reiniciando Protocolo_ -- 🛠 "
+curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=true&parse_mode=markdown&text=$MSG" $URL		                  
     fi
 }
 
@@ -48,11 +48,11 @@ echo "
 <p id='ultact'>Última actualización: $FECHA</p>
 <hr>
 " > $DIR/$ARCHIVO
-
-
-
-
 # Servicios a chequear (podemos agregar todos los que deseemos
+
+
+# PROTOCOLO v2ray
+EstadoServicio v2ray
 # PROTOCOLO SSH
 EstadoServicio ssh
 # PROTOCOLO DROPBEAR
@@ -71,40 +71,41 @@ echo "<p>Estado del servicio badvpn está ||  $badvpn </span>.</p> " >> $DIR/$AR
 PIDVRF3="$(ps aux|grep badvpn |grep -v grep|awk '{print $2}')"
 if [[ -z $PIDVRF3 ]]; then
 screen -dmS badvpn2 /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10
-NOM=`less /etc/newadm/ger-user/nombre.log` > /dev/null 2>&1
+NOM=`less /etc/VPS-MX/controlador/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/newadm/ger-user/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-MX/controlador/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
-KEY="862633455:AAGJ9BBJanzV6yYwLSemNAZAVwn7EyjrtcY"
+KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-MSG="⚠️ AVISO DE VPS: $NOM1 ⚠️
-❗️ Reiniciando BadVPN ❗️"
-curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=1&text=$MSG" $URL
+MSG="⚠️ _AVISO DE VPS:_ *$NOM1* ⚠️
+❗️ _Protocolo_ *[ BADVPN ]* _con Fallo_ ❗️ 
+🛠 _-- Reiniciando Protocolo_ -- 🛠 "
+curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=true&parse_mode=markdown&text=$MSG" $URL
 else
 for pid in $(echo $PIDVRF3); do
-echo""
+echo ""
 done
 fi
-
 #SERVICE PYTHON DIREC
 ureset_python () {
-for port in $(cat /etc/newadm/PortPD.log| grep -v "nobody" |cut -d' ' -f1)
+for port in $(cat /etc/VPS-MX/PortPD.log| grep -v "nobody" |cut -d' ' -f1)
 do
 PIDVRF3="$(ps aux|grep pydic-"$port" |grep -v grep|awk '{print $2}')"
 if [[ -z $PIDVRF3 ]]; then
-screen -dmS pydic-"$port" python /etc/ger-inst/PDirect.py "$port"
-NOM=`less /etc/newadm/ger-user/nombre.log` > /dev/null 2>&1
+screen -dmS pydic-"$port" python /etc/VPS-MX/protocolos/PDirect.py "$port"
+NOM=`less /etc/VPS-MX/controlador/nombre.log` > /dev/null 2>&1
 NOM1=`echo $NOM` > /dev/null 2>&1
-IDB=`less /etc/newadm/ger-user/IDT.log` > /dev/null 2>&1
+IDB=`less /etc/VPS-MX/controlador/IDT.log` > /dev/null 2>&1
 IDB1=`echo $IDB` > /dev/null 2>&1
-KEY="862633455:AAGJ9BBJanzV6yYwLSemNAZAVwn7EyjrtcY"
+KEY="862633455:AAEgkSywlAHQQOMXzGHJ13gctV6wO1hm25Y"
 URL="https://api.telegram.org/bot$KEY/sendMessage"
-MSG="⚠️ AVISO DE VPS: $NOM1 ⚠️
-❗️ Reiniciando Proxy-PhytonDirecto: $port ❗️ "
-curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=1&text=$MSG" $URL
+MSG="⚠️ _AVISO DE VPS:_ *$NOM1* ⚠️
+❗️ _Protocolo_ *[ PyDirec: $port ]* _con Fallo_ ❗️ 
+🛠 _-- Reiniciando Protocolo_ -- 🛠 "
+curl -s --max-time 10 -d "chat_id=$IDB1&disable_web_page_preview=true&parse_mode=markdown&text=$MSG" $URL
 else
 for pid in $(echo $PIDVRF3); do
-echo""
+echo ""
 done
 fi
 done

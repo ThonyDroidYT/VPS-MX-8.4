@@ -1,10 +1,12 @@
 #!/bin/bash
-#06/05/2020
+#27/01/2021
 clear
-msg -bar
+clear
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
+SCPdir="/etc/VPS-MX" && [[ ! -d ${SCPdir} ]] && exit 1
+SCPusr="${SCPdir}/controlador" && [[ ! -d ${SCPusr} ]] && mkdir ${SCPusr}
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
+SCPinst="${SCPdir}/protocolos" && [[ ! -d ${SCPfrm} ]] && mkdir ${SCPfrm}
 RAM () {
 sudo sync
 sudo sysctl -w vm.drop_caches=3 > /dev/null 2>&1
@@ -115,8 +117,8 @@ if [ -e /etc/squid/squid.conf ]; then
 elif [ -e /etc/squid3/squid.conf ]; then
 [[ `grep -c "^#CACHE DO SQUID" /etc/squid3/squid.conf` -gt 0 ]] && squid=$on || squid=$off
 fi
-echo -e "\033[1;37m       =====>>►► 🐲 PANEL VPS•MX 🐲 ◄◄<<=====       \033[1;37m"
 msg -bar
+msg -tit
 msg -ama "                OPTIMIZADORES BASICOS "
 msg -bar
 echo -ne "\033[1;32m [1] > " && msg -azu "TCP-SPEED $tcp"
@@ -124,7 +126,7 @@ echo -ne "\033[1;32m [2] > " && msg -azu "CACHE PARA SQUID $squid"
 echo -ne "\033[1;32m [3] > " && msg -azu "REFRESCAR RAM"
 echo -ne "\033[1;32m [4] > " && msg -azu "LIMPIAR PAQUETES  OBSOLETOS"
 echo -ne "\033[1;32m [5] > " && msg -azu "$(fun_trans "RESET IPTABLES")"
-echo -ne "\033[1;32m [0] > " && msg -bra "$(fun_trans "VOLVER")"
+echo -ne "$(msg -bar)\n\033[1;32m [0] > " && msg -bra "\e[97m\033[1;41m VOLVER \033[1;37m"
 msg -bar
 while [[ ${arquivoonlineadm} != @(0|[1-5]) ]]; do
 read -p "[0-5]: " arquivoonlineadm

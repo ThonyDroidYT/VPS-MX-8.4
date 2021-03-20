@@ -1,8 +1,11 @@
 #!/bin/bash
-#19/12/2019
+#25/01/2021
+clear
+clear
+SCPdir="/etc/VPS-MX"
+SCPfrm="${SCPdir}/herramientas" && [[ ! -d ${SCPfrm} ]] && exit
+SCPinst="${SCPdir}/protocolos"&& [[ ! -d ${SCPinst} ]] && exit
 declare -A cor=( [0]="\033[1;37m" [1]="\033[1;34m" [2]="\033[1;31m" [3]="\033[1;33m" [4]="\033[1;32m" )
-SCPfrm="/etc/ger-frm" && [[ ! -d ${SCPfrm} ]] && exit
-SCPinst="/etc/ger-inst" && [[ ! -d ${SCPinst} ]] && exit
 mportas () {
 unset portas
 portas_var=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
@@ -14,13 +17,13 @@ i=1
 echo -e "$portas"
 }
 fun_ip () {
-if [[ -e /etc/MEUIPADM ]]; then
-IP="$(cat /etc/MEUIPADM)"
+if [[ -e /etc/VPS-MX/MEUIPvps ]]; then
+IP="$(cat /etc/VPS-MX/MEUIPvps)"
 else
 MEU_IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 MEU_IP2=$(wget -qO- ipv4.icanhazip.com)
-[[ "$MEU_IP" != "$MEU_IP2" ]] && IP="$MEU_IP2" || IP="$MEU_IP"
-echo "$MEU_IP2" > /etc/MEUIPADM
+[[ "$MEU_IP" != "$MEU_IP" ]] && IP="$MEU_IP2" || IP="$MEU_IP"
+echo "$MEU_IP" > /etc/VPS-MX/MEUIPvps
 fi
 }
 fun_eth () {
@@ -54,20 +57,21 @@ $comando > /dev/null 2>&1
 pid=$!
 while [[ -d /proc/$pid ]]; do
 echo -ne " \033[1;33m["
-   for((i=0; i<10; i++)); do
+   for((i=0; i<20; i++)); do
    echo -ne "\033[1;31m##"
-   sleep 0.2
+   sleep 0.8
    done
 echo -ne "\033[1;33m]"
 sleep 1s
 echo
 tput cuu1 && tput dl1
 done
-echo -e " \033[1;33m[\033[1;31m####################\033[1;33m] - \033[1;32m100%\033[0m"
+echo -ne " \033[1;33m[\033[1;31m########################################\033[1;33m] - \033[1;32m100%\033[0m\n"
 sleep 1s
 }
 fun_dropbear () {
  [[ -e /etc/default/dropbear ]] && {
+ msg -bar
  echo -e "\033[1;32m $(fun_trans ${id} "REMOVIENDO DROPBEAR")"
  msg -bar
  service dropbear stop & >/dev/null 2>&1
@@ -78,9 +82,11 @@ fun_dropbear () {
  [[ -e /etc/default/dropbear ]] && rm /etc/default/dropbear
  return 0
  }
-echo -e "\033[1;32m $(fun_trans "INSTALADOR DROPBEAR | VPS-MX By @Kalix1")"
 msg -bar
-echo -e "\033[1;31m $(fun_trans "Seleccione Puertos Validados en orden secuencial:")\033[1;32m 22 80 81 82 85 90\033[1;37m"
+msg -tit
+echo -e "\033[1;32m $(fun_trans "   INSTALADOR DROPBEAR | VPS-MX By @Kalix1")"
+msg -bar
+echo -e "\033[1;31m $(fun_trans "Seleccione Puertos Validados en orden secuencial:\n")\033[1;32m 22 80 81 82 85 90\033[1;37m"
 msg -bar
 echo -ne "\033[1;31m $(fun_trans "Digite  Puertos"): \033[1;37m" && read DPORT
 tput cuu1 && tput dl1
@@ -126,11 +132,14 @@ TCPKeepAlive yes
 AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes" > /etc/ssh/sshd_config
+msg -bar
 echo -e "${cor[2]} $(fun_trans ${id} "Instalando dropbear")"
 msg -bar
 fun_bar "apt-get install dropbear -y"
+apt-get install dropbear -y > /dev/null 2>&1
 msg -bar
 touch /etc/dropbear/banner
+msg -bar
 echo -e "${cor[2]} $(fun_trans ${id} "Configurando dropbear")"
 cat <<EOF > /etc/default/dropbear
 NO_START=0
@@ -175,6 +184,7 @@ fun_bar "apt-get install dropbear -y"
 touch /etc/dropbear/banner
 msg -bar
 echo -e "${cor[2]} $(fun_trans  "Configurando dropbear")"
+msg -bar
 cat <<EOF > /etc/default/dropbear
 NO_START=0
 DROPBEAR_EXTRA_ARGS="VAR"
