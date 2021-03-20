@@ -3,7 +3,7 @@
 UPDATE 03/03/2021
 ```
 
-![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.3.1.png)
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.4.png)
 
 **Manager Script**
 
@@ -47,13 +47,13 @@ BOT MANAGER:
 sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
 ```
-VPS-MX Versao 8.3.1 (las dependencias faltantes se instalarán automáticamente)
+VPS-MX Versao 8.4 (las dependencias faltantes se instalarán automáticamente)
 ```
 -------------------------------------------------------------------------------
 
 ## :scroll: Registro de cambios
 
-**VERSION: 8.3.1**
+**VERSION: 8.4**
 
 https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Vercion
 
