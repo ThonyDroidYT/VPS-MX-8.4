@@ -354,9 +354,10 @@ done <<< "${portasVAR}"
 [[ ! -z $APC ]] && echo -e $APC
 [[ ! -z $OVPN ]] && echo -e $OVPN
 [[ ! -z $BAD ]] && echo -e $BAD
+[[ -e "/etc/wireguard/wg0.conf" ]] && echo -e "\033[1;31m WIREGUARD: \033[1;32m$wgport \033[0m"
 msg -bar2
-
 }
+wgport=$(grep '^ListenPort' /etc/wireguard/wg0.conf | cut -d " " -f 3)
 ofus () {
 unset txtofus
 number=$(expr length $1)
@@ -547,6 +548,8 @@ msg -ama "$(fun_trans "Arquitectura"): ${null}$(uname -m)"
 msg -bar
 return 0
 }
+#Pid Wireguard
+[[ -e "/etc/wireguard/wg0.conf" ]] && wg="\033[1;32m[ON]\033[0m" || wg="\033[1;31m[OFF]\033[0m"
 float_data () {
 valuest=$(ps ax |grep /etc/shadowsocks-r|grep -v grep)
 [[ $valuest != "" ]] && valuest="\033[1;32m[ON]" || valuest="\033[1;31m[OFF]"
@@ -568,7 +571,7 @@ case $1 in
 "sockspy.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "SOCKS PYTHON --------------------- $(pid_inst python)";;
 "v2ray.sh")echo -ne "$(msg -verd "[$2]") $(msg -verm2 "==>>") " && msg -azu "V2RAY ---------------------------- $(pid_inst v2ray)";; 
 "budp.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "BADVPN-(UDP:7300) ---------------- $(pid_inst badvpn)";;
-
+"wireguard.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "WIREGUARD-------------------- $wg";;
 "paysnd.sh")return 1;;
 "ultrahost")return 1;;
 "speed.sh")return 1;;
