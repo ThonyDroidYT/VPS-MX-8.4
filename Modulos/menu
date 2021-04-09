@@ -570,8 +570,8 @@ case $1 in
 "Shadowsocks-R.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "SHADOWSOCKS-R -------------------- ${valuest}";; 
 "sockspy.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "SOCKS PYTHON --------------------- $(pid_inst python)";;
 "v2ray.sh")echo -ne "$(msg -verd "[$2]") $(msg -verm2 "==>>") " && msg -azu "V2RAY ---------------------------- $(pid_inst v2ray)";; 
-"budp.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "BADVPN-(UDP:7300) ---------------- $(pid_inst badvpn)";;
-"wireguard.sh")echo -ne "$(msg -verd " [$2]") $(msg -verm2 "==>>") " && msg -azu "WIREGUARD------------------------ $wg";;
+"budp.sh")echo -ne "$(msg -verd "[$2]") $(msg -verm2 "==>>") " && msg -azu "BADVPN-(UDP:7300) ---------------- $(pid_inst badvpn)";;
+"wireguard.sh")echo -ne "$(msg -verd "[$2]") $(msg -verm2 "==>>") " && msg -azu "WIREGUARD------------------------ $wg";;
 "paysnd.sh")return 1;;
 "ultrahost")return 1;;
 "speed.sh")return 1;;
