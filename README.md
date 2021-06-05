@@ -3,7 +3,7 @@
 UPDATE 19/03/2021
 ```
 
-![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.4.png)
+![logo](https://github.com/ThonyDroidYT/VPS-MX-8.4/blob/main/Imagenes/NEW-ULTIMATE-VPS-MX-8.4.png)
 
 **Manager Script**
 
@@ -44,7 +44,7 @@ BOT MANAGER:
 
 ## :book: Installation
 
-sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
+sudo apt update -y; apt upgrade -y; wget https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/instalscript.sh; chmod 777 instalscript.sh* && ./instalscript.sh*
 
 ```
 VPS-MX Versao 8.4 (las dependencias faltantes se instalarán automáticamente)
@@ -55,7 +55,7 @@ VPS-MX Versao 8.4 (las dependencias faltantes se instalarán automáticamente)
 
 **VERSION: 8.4**
 
-https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/Install/Version
+https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/Install/Version
 
 ## :octocat: Contribute
 
