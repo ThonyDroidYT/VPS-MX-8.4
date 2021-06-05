@@ -9,7 +9,8 @@ SCPidioma="${SCPdir}/idioma"
 SCPusr="${SCPdir}/controlador"
 SCPfrm="${SCPdir}/herramientas"
 SCPinst="${SCPdir}/protocolos"
-kalix1="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0FBQUFBRVhRT1N5SXBOMkpaMGVoVVEvVlBTLU1YL21haW4vTW9kdWxvcw=="
+kalix11="==wcvxWdk9WTv4Wah12L04COtgVTtMFUW9CVZRWavJHR552boR1Lt92YuQnblRnbvNmclNXdiVHa0l2ZucXYy9yL6MHc0RHa"
+kalix1="$(echo -e $kalix11|rev)"
 PUTO='base64 -d'
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 echo "nameserver 8.8.4.4" >> /etc/resolv.conf
@@ -212,9 +213,9 @@ MIP2=$(wget -qO- ifconfig.me)
 [[ "$MIP" != "$MIP2" ]] && IP="$MIP2" || IP="$MIP"
 }  
 function_verify () {
-wget -O /usr/bin/trans https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/trans &> /dev/null
+wget -O /usr/bin/trans https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/VPS-MX_Oficial/ArchivosUtilitarios/trans &> /dev/null
 wget -O /etc/versin_script https://raw.githubusercontent.com/VPS-MX/VPS-MX_Oficial/master/Version &> /dev/null
-wget -O /usr/bin/SPR https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/VPS-MX/main/VPS-MX_Oficial/ArchivosUtilitarios/SPR/SPR &> /dev/null
+wget -O /usr/bin/SPR https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/VPS-MX_Oficial/ArchivosUtilitarios/SPR/SPR &> /dev/null
 chmod +x /usr/bin/SPR
 ## lognull
 mkdir /usr/share/mediaptre &>/dev/null
