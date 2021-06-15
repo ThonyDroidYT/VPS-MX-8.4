@@ -50,13 +50,16 @@ meu_ip
 echo -e "\033[1;33mInstalando Arquivos... "
 echo -e "\033[1;36m--------------------------------------------------------------------\033[0m"
 cd $HOME
+SCPinstal="$HOME/install" [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
 REQUEST=$(echo $SCPresq|$SUB_DOM)
-wget -O "$HOME/lista-arq" ${REQUEST}/GERADOR > /dev/null 2>&1
+wget -O "${SCPinstal}/VPS-MX.zip" ${REQUEST} > /dev/null 2>&1
+unzip ${SCPinstal}/VPS-MX.zip
+rm -rf ${SCPinstal}/VPS-MX.zip
 sleep 1s
 [[ -e $HOME/lista-arq ]] && {
-for arqx in `cat $HOME/lista-arq`; do
+for arqx in `ls ${SCPinstal}`; do
 echo -ne "\033[1;33mBaixando Arquivo \033[1;31m[$arqx] "
-wget -O $HOME/$arqx ${REQUEST}/${arqx} > /dev/null 2>&1 && {
+echo -e "Hola" &> /dev/null && {
 echo -e "\033[1;31m- \033[1;32mRecebido Com Sucesso!"
 [[ -e $HOME/$arqx ]] && veryfy_fun $arqx
 } || echo -e "\033[1;31m- \033[1;31mFalha (nao recebido!)"
