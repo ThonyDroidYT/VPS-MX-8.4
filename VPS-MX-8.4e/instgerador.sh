@@ -53,6 +53,8 @@ cd $HOME
 SCPinstal="$HOME/install" && [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
 REQUEST=$(echo $SCPresq|$SUB_DOM)
 wget -O "${SCPinstal}/VPS-MX.zip" ${REQUEST} > /dev/null 2>&1
+wget -O "${SCPinstal}/gerar.sh" ${REQUEST} > /dev/null 2>&1
+wget -O "${SCPinstal}/http-server.py" ${REQUEST} > /dev/null 2>&1
 unzip ${SCPinstal}/VPS-MX.zip &> /dev/null
 rm -rf ${SCPinstal}/VPS-MX.zip
 sleep 1s
