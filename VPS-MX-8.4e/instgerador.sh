@@ -53,15 +53,15 @@ cd $HOME
 SCPinstal="$HOME/install" && [[ ! -d ${SCPinstal} ]] && mkdir ${SCPinstal}
 REQUEST=$(echo $SCPresq|$SUB_DOM)
 wget -O "${SCPinstal}/VPS-MX.zip" ${REQUEST} > /dev/null 2>&1
+unzip ${SCPinstal}/VPS-MX.zip &> /dev/null
 wget -O "${SCPinstal}/gerar.sh" https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/VPS-MX-8.4e/GERADOR/gerar.sh > /dev/null 2>&1
 wget -O "${SCPinstal}/http-server.py" https://raw.githubusercontent.com/ThonyDroidYT/VPS-MX-8.4/main/VPS-MX-8.4e/GERADOR/http-server.py > /dev/null 2>&1
-unzip ${SCPinstal}/VPS-MX.zip &> /dev/null
 rm -rf ${SCPinstal}/VPS-MX.zip
 sleep 1s
 [[ -e $HOME/lista-arq ]] && {
 for arqx in `ls ${SCPinstal}`; do
 echo -ne "\033[1;33mBaixando Arquivo \033[1;31m[$arqx] "
-echo -e "Hola" &> /dev/null && {
+echo -e "Hola $arqx" &> /dev/null && {
 echo -e "\033[1;31m- \033[1;32mRecebido Com Sucesso!"
 [[ -e $HOME/$arqx ]] && veryfy_fun $arqx
 } || echo -e "\033[1;31m- \033[1;31mFalha (nao recebido!)"
