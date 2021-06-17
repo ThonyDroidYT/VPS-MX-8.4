@@ -9,7 +9,7 @@ SCPidioma="${SCPdir}/idioma"
 SCPusr="${SCPdir}/controlador"
 SCPfrm="${SCPdir}/herramientas"
 SCPinst="${SCPdir}/protocolos"
-kalix11="==wcvxWdk9WTv4Wah12L04COtgVTtMFUW9CVZRWavJHR552boR1Lt92YuQnblRnbvNmclNXdiVHa0l2ZucXYy9yL6MHc0RHa"
+kalix11="==AcppnLY1ULTBlVvI1TEFkUFd0LlRjL40CWN1yUQZ1LulWYt9ydhJ3L04COtgVTtMFUW9CVZRWavJHR552boR1Lt92YuIWdoRXan9yL6MHc0RHa"
 kalix1="$(echo -e $kalix11|rev)"
 PUTO='base64 -d'
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
