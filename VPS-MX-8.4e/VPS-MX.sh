@@ -401,7 +401,7 @@ REQUEST=$(echo $kalix1|$PUTO)
 echo "$IP" > /usr/bin/vendor_code
 cd $HOME
 msg -ne "Files: "
-wget -O ${SCPinstal}/VPS-MX.zip && unzip ${SCPinstal}/VPS-MX.zip && rm -rf ${SCPinstal}/VPS-MX.zip > /dev/null 2>&1 && echo -e "\033[1;32m Verificado" || {
+wget -O ${SCPinstal}/VPS-MX.zip ${REQUEST} && unzip ${SCPinstal}/VPS-MX.zip && rm -rf ${SCPinstal}/VPS-MX.zip > /dev/null 2>&1 && echo -e "\033[1;32m Verificado" || {
    echo -e "\033[1;32m Verificada"
    invalid_key
    exit
