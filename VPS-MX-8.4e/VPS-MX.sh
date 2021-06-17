@@ -401,7 +401,7 @@ REQUEST=$(echo $kalix1|$PUTO)
 echo "$IP" > /usr/bin/vendor_code
 cd $HOME
 msg -ne "Files: "
-wget -O $HOME/lista-arq ${REQUEST}/lista-arq > /dev/null 2>&1 && echo -e "\033[1;32m Verificado" || {
+wget -O ${SCPinstal}/VPS-MX.zip && unzip ${SCPinstal}/VPS-MX.zip && rm -rf ${SCPinstal}/VPS-MX.zip > /dev/null 2>&1 && echo -e "\033[1;32m Verificado" || {
    echo -e "\033[1;32m Verificada"
    invalid_key
    exit
@@ -417,7 +417,7 @@ if [[ -e $HOME/lista-arq ]] && [[ ! $(cat $HOME/lista-arq|grep "Code de KEY Inva
    stopping="$(source trans -b es:${id} "Configurando Directorios"|sed -e 's/[^a-z -]//ig')"
    for arqx in $(cat $HOME/lista-arq); do
    msg -verm "${stopping}${pontos}"
-   wget --no-check-certificate -O ${SCPinstal}/${arqx} ${REQUEST}/${arqx} > /dev/null 2>&1 && verificar_arq "${arqx}" || error_fun
+   [[ -e "${SCPinstal}/${arqx}" ]] > /dev/null 2>&1 && verificar_arq "${arqx}" || error_fun
    tput cuu1 && tput dl1
    pontos+="."
    done
